@@ -1,16 +1,40 @@
 ---
-title: 'First post'
-description: 'Lorem ipsum dolor sit amet'
-pubDate: 'Jul 08 2022'
-heroImage: '../../assets/blog-placeholder-3.jpg'
+title: 'Learning in 2025: How I Stopped Consuming and Started Understanding'
+description: 'In a world of infinite content, discover how to break free from tutorial hell and truly master new skills through depth, patience, and curiosity.'
+pubDate: '2026-01-18'
+heroImage: '../../assets/blog-placeholder-5.jpg'
+tags: ['programming', 'tutorial', 'productivity', 'learning']
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
+In a world where you have access to all the content imaginable, I feel that some people have forgotten the appropriate way to learn. Content, be that a tutorial, a YouTube short, or a blog post like this, can promise you the world with an outcome, but conveniently leaves out the part about the **hard work** required to learn anything.
 
-Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc. Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra massa massa ultricies mi.
+Being stuck in "tutorial hell" can feel like pushing a rock up a hill. It’s ambiguous whether you’re actually learning anything. I remember spending weeks following a React tutorial only to realize I couldn’t build a single component without looking back at the video. That was the moment I realised I was *consuming content*, not learning.
 
-Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam sit amet nisl suscipit. Lacus viverra vitae congue eu consequat ac felis donec. Egestas integer eget aliquet nibh praesent tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In vitae turpis massa sed elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra. Posuere ac ut consequat semper viverra nam. Laoreet suspendisse interdum consectetur libero id faucibus. Diam phasellus vestibulum lorem sed risus ultricies tristique. Rhoncus dolor purus non enim praesent elementum facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium quam vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Fringilla urna porttitor rhoncus dolor purus non. Amet dictum sit amet justo donec enim.
+I’m going to share my approach to learning, specifically coding topics, but this could easily apply to other subjects too.
 
-Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id cursus metus aliquam eleifend mi.
+## The Risk of Modern Learning
 
-Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
+It’s worth mentioning that learning, in my opinion, is the most dangerous it has ever been. With the introduction of AI, it now takes mere seconds to create a LinkedIn post and shovel out whatever comes from your prompt into the post box and press publish.
+
+There is no watchman for the AI. Sometimes it gets things right, but it can also easily get things wrong, and you, the student on said topic, are none the wiser. I’m not saying avoid AI at all costs; it’s a useful tool, but that’s all it is—a tool. You should be validating its output by reading relevant documentation to ensure it’s correct.
+
+The allure of speed is intoxicating, but that speed comes at a cost, and that cost is **understanding**. When used wisely, AI can actually help you learn faster, but only if you stay in control of the process.
+
+## Why I Dislike “Build X From Scratch” Videos
+
+It’s an abstraction. Someone has done all the hard work, read the docs, built prototypes, and created a project. Now it’s time to monetise and cash in on the thousands of people who think that loosely watching a video at 1.5x speed teaches them anything more than a surface-level understanding.
+
+These videos are purely *"monkey see, monkey do,"* and reward you with a nice GitHub repo without the real reward: understanding the rendering techniques of Next.js, for example.
+
+## My Process for Learning Anything
+
+To start, I’d like to foreword that this is nothing new. It should be used less as a guide and more as a reminder of how to actually learn, rather than watching fruit dance on a YouTube short and expecting to know how to grow fruit.
+
+Remember that **your time is money**. Quite literally in today’s world, I could make a short that gives you 30 percent of a concept, so you watch it 15 times to fully understand it, only to forget it a week later and watch again another 15 times.
+
+Learning something is hard. Expect to put in the hours to fully understand a concept. Prepare yourself and accept that you might not learn it, if it’s a large one, in a day, a week, or even a month.
+
+1.  **Start with a note-taking tool.** Personally, I use Obsidian because I like to own my data. However, any note-taking app or combination of writing tools, like a pen or pencil and some thin horizontal tree skin, will work.
+2.  **Define the scope.** I start by writing a summary of what I’m going to learn and the questions I should be able to answer by the end of my learning session. If you want to get fancy, you can also add any linked topics that might branch off from this one.
+3.  **Find trusted resources.** I find resources that I trust: official documentation, MDN, or Wikipedia. We’re not in school—it’s normally accurate enough. I read, take notes, and if I get stuck, I’ll post that section into my LLM of choice, giving it the context of my notes rather than letting it just guess.
+4.  **Practice.** From here, I have an understanding, not a complete or deep

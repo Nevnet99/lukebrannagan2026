@@ -1,0 +1,41 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import Navbar from "../components/Navbar.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+  lang?: string;
+  url?: string;
+  image?: string;
+}
+
+const {
+  title = "My Site",
+  description = "A short description of the site.",
+  lang = "en",
+  url = "/",
+  image = "/og.png",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang} class="h-full">
+  <BaseHead title={title} description={description} />
+
+  <body class="min-h-full font-sans antialiased bg-background text-text">
+    <Navbar />
+    <a
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-white px-3 py-2 rounded shadow"
+      href="#content">Skip to content</a
+    >
+
+    <main id="content" class="max-w-6xl mx-auto px-8 py-8">
+      <slot />
+    </main>
+
+    <slot name="scripts" />
+    <Footer />
+  </body>
+</html>

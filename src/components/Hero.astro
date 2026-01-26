@@ -1,0 +1,136 @@
+---
+import { Image } from "astro:assets";
+import { Github, Linkedin, FileText, Terminal } from "@lucide/astro";
+
+// --- CONFIGURATION ---
+
+const profile = {
+  headline: "Senior Frontend Engineer.",
+  bio: "I build scalable Design Systems and high-performance web applications. Currently modernizing legacy architectures at Kroo and migrating platforms to Vite & Next.js.",
+  // Make sure this image is high-res and looks good wide!
+  avatarFull: "/assets/luke-profile.jpg",
+};
+
+const status = {
+  text: "Available",
+  color: "text-green-400",
+};
+
+const stack = ["TypeScript", "React", "Next.js", "Go", "AWS"];
+
+const links = [
+  {
+    label: "Download CV",
+    href: "/assets/Luke_Brannagan_CV.pdf",
+    icon: FileText,
+    isPrimary: true,
+    download: true,
+  },
+  {
+    label: "GitHub",
+    href: "https://github.com/Nevnet99",
+    icon: Github,
+    isPrimary: false,
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/luke-brannagan",
+    icon: Linkedin,
+    isPrimary: false,
+  },
+];
+// --- END CONFIGURATION ---
+---
+
+<section
+  class="relative w-full min-h-[80vh] flex items-center overflow-hidden font-mono"
+>
+  {/* --- BACKGROUND IMAGE LAYER --- */}
+  <div class="absolute inset-0 z-0 pointer-events-none select-none">
+    {
+      /* 1. The Image itself:
+       - Placed absolutely, covering space.
+       - Object-cover / center to handle resizing.
+       - Grayscale and lowered opacity to blend back.
+       - Translate-x moves it slightly right on desktop so face isn't under text.
+    */
+    }
+    <Image
+      src={profile.avatarFull}
+      alt=""
+      width={1920}
+      height={1080}
+      class="w-full h-full object-cover object-center md:object-[center_20%] opacity-20 md:opacity-30 grayscale contrast-125 md:translate-x-1/4"
+    />
+
+    <div
+      class="absolute inset-0 bg-gradient-to-r from-background via-background/90 md:via-background/70 to-transparent"
+    >
+    </div>
+
+    <div
+      class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"
+    >
+    </div>
+
+    <div
+      class="absolute inset-0 bg-gradient-to-l from-background via-transparent to-transparent"
+    >
+    </div>
+  </div>
+
+  <div class="relative z-10 w-full max-w-6xl mx-auto px-6 pt-20 pb-16">
+    <div class="max-w-2xl space-y-8">
+      <div class="flex items-center gap-3 text-sm text-text/60">
+        <span class="flex items-center gap-2">
+          <Terminal size={14} />
+          <span>~/luke-brannagan</span>
+        </span>
+        <span class="text-text/20">|</span>
+        <span class={`animate-pulse ${status.color}`}>● {status.text}</span>
+      </div>
+
+      {/* Headlines */}
+      <div class="space-y-4">
+        <h1 class="text-5xl md:text-6xl font-bold leading-tight tracking-tight">
+          {profile.headline}
+        </h1>
+
+        <p class="text-lg leading-relaxed text-text/80 max-w-xl">
+          {profile.bio}
+        </p>
+      </div>
+
+      {/* Tech Stack Ticker */}
+      <div class="space-y-2 pt-4">
+        <span class="text-xs uppercase tracking-widest text-text/40"
+          >Core Stack</span
+        >
+        <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm font-bold">
+          {stack.map((tech) => <span>{tech}</span>)}
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-4 pt-6">
+        {
+          links.map((link) => (
+            <a
+              href={link.href}
+              target={link.download ? "_self" : "_blank"}
+              download={link.download ? "Luke_Brannagan_CV.pdf" : undefined}
+              class:list={[
+                "flex items-center gap-2 px-6 py-3 transition-all",
+                link.isPrimary
+                  ? "bg-text text-background font-bold hover:bg-white active:scale-95"
+                  : "border border-text/20 hover:bg-text/5 bg-background/50 backdrop-blur-sm",
+              ]}
+            >
+              <link.icon size={18} />
+              <span>{link.label}</span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

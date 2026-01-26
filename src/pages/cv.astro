@@ -1,0 +1,249 @@
+---
+import BaseLayout from "../layouts/Base.astro";
+
+import {
+  Github,
+  Linkedin,
+  Mail,
+  MapPin,
+  Download,
+  Globe,
+  Terminal,
+  Cpu,
+} from "@lucide/astro";
+
+const skills = {
+  Languages: [
+    "TypeScript",
+    "JavaScript (ES6+)",
+    "HTML5",
+    "CSS3",
+    "C#",
+    "Golang",
+  ],
+  Stack: ["React", "Next.js", "Node.js"],
+  Tooling: [
+    "Vite",
+    "Rollup",
+    "pnpm",
+    "ESLint",
+    "Prettier",
+    "Biome",
+    "Storybook",
+  ],
+  Data: ["Zustand", "Redux", "TanStack Query"],
+  Testing: ["Vitest", "React Testing Library", "Playwright"],
+  Styling: ["Tailwind CSS", "CSS Modules", "Styled Components"],
+  CMS: ["Contentful", "Sanity", "Storyblok"],
+};
+
+const jobs = [
+  {
+    role: "Senior Web Platform Developer",
+    company: "Kroo",
+    date: "Jul 2023 – Current",
+    points: [
+      "<strong>Achieved 100/100 Lighthouse Scores:</strong> Led a comprehensive accessibility audit and refactor, ensuring full WCAG 2.1 compliance across core platform pages.",
+      "<strong>Boosted Developer Efficiency:</strong> Built and deployed a scalable internal Design System using React and Vite, standardizing UI components across the engineering organization.",
+      "<strong>Modernized Frontend Architecture:</strong> Migrated legacy codebases from CRA to Vite. Implemented Zustand and TanStack Query, significantly improving DX and application speed.",
+      "<strong>Driven Engineering Excellence:</strong> Partnered with Product and Design to define frontend architecture and engineering best practices.",
+    ],
+  },
+  {
+    role: "Frontend Engineer",
+    company: "Dexla",
+    date: "Feb 2023 – Jun 2023",
+    points: [
+      "<strong>Shipped a Complex WYSIWYG Editor:</strong> Engineered a drag-and-drop web builder using Next.js and React, delivering a seamless user experience for non-technical users.",
+    ],
+  },
+  {
+    role: "Frontend Engineer",
+    company: "Primer",
+    date: "Jul 2022 – Nov 2022",
+    points: [
+      "<strong>Cut Development Time by ~50%:</strong> Scaled and enhanced the GOAT Design System, streamlining frontend workflows and ensuring UI consistency.",
+      "<strong>Reduced Operating Costs by 3-4x:</strong> Re-architected the Observability platform to focus on performance, drastically lowering dashboard resource consumption.",
+    ],
+  },
+  {
+    role: "Frontend Engineer",
+    company: "Harbr",
+    date: "Apr 2022 – Jun 2022",
+    points: [
+      "<strong>Optimized Dashboard Performance:</strong> Maintained and enhanced the core dashboard UI using React and Redux, improving load times and usability metrics.",
+      "<strong>Collaborative Feature Delivery:</strong> Worked closely with Backend and Design teams to ship new product features in an agile environment.",
+    ],
+  },
+  {
+    role: "Senior/Mid/Junior Frontend Developer",
+    company: "DEPT",
+    date: "Jan 2020 – Apr 2022",
+    points: [
+      "<strong>Delivered Large-Scale Web Apps:</strong> Built high-performance web applications for major clients within cross-functional agile teams.",
+      "<strong>Mentorship & Leadership:</strong> Mentored junior developers on Next.js, React patterns, and Accessibility standards.",
+      "<strong>Performance Optimization:</strong> Audited and optimized client sites to meet core web vitals requirements.",
+    ],
+  },
+  {
+    role: "Junior Software Developer",
+    company: "Oliver James Associates",
+    date: "Jan 2019 – Dec 2019",
+    // Special case for the junior role which is just text, no bullets in your CV
+    summary:
+      "Developed full-stack internal dashboards using C#, ASP.NET, and JavaScript, contributing to QA and agile processes.",
+  },
+];
+---
+
+<BaseLayout
+  title="Luke Brannagan - CV"
+  description="Luke Brannagan's Curriculum Vitae"
+>
+  <div
+    class="max-w-3xl mx-auto px-6 py-12 md:py-20 animate-in fade-in duration-700"
+  >
+    {/* --- HEADER --- */}
+    <header
+      class="flex flex-col md:flex-row gap-8 mb-16 border-b border-text/10 pb-10"
+    >
+      <div class="flex-1 space-y-4">
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-text">
+          Luke Brannagan
+        </h1>
+        <h2
+          class="text-lg md:text-xl text-text/60 font-medium flex flex-wrap items-center gap-4"
+        >
+          <span>Senior Frontend Engineer</span>
+          <span class="hidden md:inline text-text/20">|</span>
+          <span class="flex items-center gap-1.5 text-sm">
+            <MapPin size={15} /> Manchester, UK
+          </span>
+        </h2>
+
+        <div class="flex flex-wrap gap-3 pt-2 text-sm font-mono">
+          <a
+            href="mailto:luke@brannagan.co"
+            class="hover:text-purple-300 transition-colors flex items-center gap-2"
+          >
+            <Mail size={14} /> luke@brannagan.co
+          </a>
+          <span class="text-text/20">/</span>
+          <a
+            href="https://lukebrannagan.com"
+            class="hover:text-purple-300 transition-colors flex items-center gap-2"
+          >
+            <Globe size={14} /> lukebrannagan.com
+          </a>
+        </div>
+
+        <div class="flex gap-4 pt-4">
+          <a
+            href="https://github.com/Nevnet99"
+            target="_blank"
+            class="p-2 border border-text/20 rounded-md hover:bg-text/10 transition-colors"
+            aria-label="GitHub"
+          >
+            <Github size={20} />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/luke-brannagan"
+            target="_blank"
+            class="p-2 border border-text/20 rounded-md hover:bg-text/10 transition-colors"
+            aria-label="LinkedIn"
+          >
+            <Linkedin size={20} />
+          </a>
+          <a
+            href="/assets/Luke_Brannagan_CV.pdf"
+            download="Luke_Brannagan_CV.pdf"
+            class="flex items-center gap-2 px-4 py-2 bg-text text-background font-bold rounded-md hover:bg-white transition-transform active:scale-95 ml-auto md:ml-0 print:hidden"
+          >
+            <Download size={18} />
+            <span>Download PDF</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    {/* --- SUMMARY --- */}
+    <section class="mb-16">
+      <h3
+        class="font-mono text-sm uppercase tracking-widest text-text/40 mb-6 flex items-center gap-2"
+      >
+        <Terminal size={14} /> Summary
+      </h3>
+      <p class="text-lg leading-relaxed text-text/90 max-w-2xl">
+        <strong class="text-white">Senior Frontend Engineer</strong> specializing
+        in scalable Design Systems, Web Performance, and Accessibility. Expert in
+        modernizing legacy architectures and driving engineering best practices. Proven
+        track record of reducing technical debt and mentoring teams to deliver high-performance,
+        WCAG-compliant applications.
+      </p>
+    </section>
+
+    {/* --- SKILLS --- */}
+    <section class="mb-16">
+      <h3
+        class="font-mono text-sm uppercase tracking-widest text-text/40 mb-6 flex items-center gap-2"
+      >
+        <Cpu size={14} /> Tech Stack
+      </h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-12">
+        {
+          Object.entries(skills).map(([category, items]) => (
+            <div>
+              <span class="text-xs font-mono text-text/50 block mb-2">
+                {category}
+              </span>
+              <div class="flex flex-wrap gap-2">
+                {items.map((skill) => (
+                  <span class="px-2 py-1 bg-text/5 border border-text/10 rounded text-sm text-text/80">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    {/* --- EXPERIENCE --- */}
+    <section class="space-y-12">
+      <h3
+        class="font-mono text-sm uppercase tracking-widest text-text/40 mb-6 flex items-center gap-2"
+      >
+        <Terminal size={14} /> Work Experience
+      </h3>
+
+      {
+        jobs.map((job) => (
+          <div class="relative pl-8 border-l border-text/10 space-y-2 group">
+            {/* Timeline Dot */}
+            <div class="absolute -left-[5px] top-2 w-2.5 h-2.5 rounded-full bg-text/20 group-hover:bg-purple-400 transition-colors" />
+
+            <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
+              <h4 class="text-xl font-bold text-text">{job.role}</h4>
+              <span class="font-mono text-xs text-text/50">{job.date}</span>
+            </div>
+
+            <div class="text-purple-300 font-medium text-sm mb-4">
+              @ {job.company}
+            </div>
+
+            {job.summary ? (
+              <p class="text-text/80 text-sm">{job.summary}</p>
+            ) : (
+              <ul class="list-disc ml-4 space-y-2 text-text/80 marker:text-text/30">
+                {job.points?.map((point) => (
+                  <li set:html={point} />
+                ))}
+              </ul>
+            )}
+          </div>
+        ))
+      }
+    </section>
+  </div>
+</BaseLayout>

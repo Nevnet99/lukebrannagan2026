@@ -1,0 +1,145 @@
+---
+import { Terminal, GitCommit, Calendar } from "@lucide/astro";
+
+// --- DATA CONFIGURATION ---
+const jobs = [
+  {
+    company: "Kroo",
+    role: "Senior Web Platform Developer",
+    date: "Jul 2023 – Present",
+    // "Current" job gets a special highlight color
+    current: true,
+    tech: ["React", "Vite", "Zustand", "A11y"],
+    points: [
+      "<strong>Achieved 100/100 Lighthouse Scores:</strong> Led accessibility audit ensuring full WCAG 2.1 compliance.",
+      "<strong>Boosted Developer Efficiency:</strong> Built scalable internal Design System using React and Vite.",
+      "<strong>Modernized Architecture:</strong> Migrated legacy CRA apps to Vite; implemented TanStack Query.",
+      "<strong>Engineering Excellence:</strong> Defined frontend architecture and best practices with Product/Design.",
+    ],
+  },
+  {
+    company: "Dexla",
+    role: "Frontend Engineer",
+    date: "Feb 2023 – Jun 2023",
+    current: false,
+    tech: ["Next.js", "React", "DnD"],
+    points: [
+      "<strong>Complex WYSIWYG Editor:</strong> Engineered a drag-and-drop web builder for non-technical users.",
+    ],
+  },
+  {
+    company: "Primer",
+    role: "Frontend Engineer",
+    date: "Jul 2022 – Nov 2022",
+    current: false,
+    tech: ["Design Systems", "Performance"],
+    points: [
+      "<strong>Cut Dev Time by ~50%:</strong> Scaled the GOAT Design System, streamlining frontend workflows.",
+      "<strong>Reduced Costs by 3-4x:</strong> Re-architected Observability platform to lower resource consumption.",
+    ],
+  },
+  {
+    company: "Harbr",
+    role: "Frontend Engineer",
+    date: "Apr 2022 – Jun 2022",
+    current: false,
+    tech: ["React", "Redux"],
+    points: [
+      "<strong>Optimized Dashboard:</strong> Enhanced core UI performance, improving load times and usability.",
+      "<strong>Feature Delivery:</strong> Collaborated with Backend/Design to ship features in an agile environment.",
+    ],
+  },
+  {
+    company: "DEPT",
+    role: "Senior / Mid / Junior Developer",
+    date: "Jan 2020 – Apr 2022",
+    current: false,
+    tech: ["Next.js", "Mentorship"],
+    points: [
+      "<strong>Delivered Large-Scale Apps:</strong> Built high-performance web apps for major clients.",
+      "<strong>Mentorship:</strong> Mentored juniors on Next.js, React patterns, and Accessibility standards.",
+    ],
+  },
+  {
+    company: "Oliver James",
+    role: "Junior Software Developer",
+    date: "Jan 2019 – Dec 2019",
+    current: false,
+    tech: ["C#", ".NET", "JavaScript"],
+    points: [
+      "Developed full-stack internal dashboards using C#, ASP.NET, and JavaScript.",
+    ],
+  },
+];
+---
+
+<section class="max-w-5xl mx-auto px-6 py-20 font-mono">
+  {/* SECTION HEADER */}
+  <div class="flex items-center gap-3 mb-12 border-b border-text/10 pb-4">
+    <Terminal size={20} class="text-text/60" />
+    <h2 class="text-2xl font-bold tracking-tight">Experience</h2>
+  </div>
+
+  <div class="relative border-l border-text/10 ml-3 md:ml-6 space-y-12">
+    {
+      jobs.map((job) => (
+        <div class="relative pl-8 md:pl-12 group">
+          {/* TIMELINE DECORATION */}
+          <div
+            class:list={[
+              "absolute -left-[5px] md:-left-[5px] top-2 w-2.5 h-2.5 rounded-full border border-background transition-colors duration-300",
+              job.current
+                ? "bg-green-400 shadow-[0_0_8px_rgba(74,222,128,0.5)]"
+                : "bg-text/20 group-hover:bg-text/60",
+            ]}
+          />
+
+          {/* HEADER: ROLE & COMPANY */}
+          <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-2">
+            <h3 class="text-xl font-bold text-text group-hover:text-blue-300 transition-colors">
+              {job.role}{" "}
+              <span class="text-text/40 font-normal">@ {job.company}</span>
+            </h3>
+            <span class="text-xs text-text/50 font-bold flex items-center gap-2 mt-1 sm:mt-0">
+              <Calendar size={12} />
+              {job.date}
+            </span>
+          </div>
+
+          {/* TECH TAGS */}
+          {job.tech && (
+            <div class="flex flex-wrap gap-2 mb-4">
+              {job.tech.map((t) => (
+                <span class="text-[10px] uppercase border border-text/10 px-1.5 py-0.5 text-text/60 bg-text/5 rounded">
+                  {t}
+                </span>
+              ))}
+            </div>
+          )}
+
+          {/* DETAILS */}
+          <ul class="space-y-2 text-sm text-text/80 leading-relaxed max-w-3xl">
+            {job.points.map((point) => (
+              <li class="flex items-start gap-3">
+                <span class="mt-1.5 w-1 h-1 bg-text/40 rounded-full shrink-0" />
+                <span set:html={point} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+
+    {/* "INITIAL COMMIT" DECORATION AT BOTTOM */}
+    <div class="relative pl-8 md:pl-12 pt-4 opacity-50">
+      <div
+        class="absolute -left-[5px] top-6 w-2.5 h-2.5 rounded-full bg-text/10"
+      >
+      </div>
+      <div class="flex items-center gap-2 text-xs text-text/40">
+        <GitCommit size={14} />
+        <span>Initial Commit (Career Start)</span>
+      </div>
+    </div>
+  </div>
+</section>

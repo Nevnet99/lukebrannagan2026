@@ -1,0 +1,52 @@
+---
+import { Terminal, BookOpen, FileText, Home } from "@lucide/astro";
+
+const navLinks = [
+  { label: "HOME", href: "/", icon: Home },
+  { label: "BLOG", href: "/blog", icon: BookOpen },
+  { label: "CV", href: "/cv", icon: FileText }, // Or point to /assets/Luke_Brannagan_CV.pdf
+];
+---
+
+<nav
+  class="w-full border-b border-text/10 bg-background/80 backdrop-blur-md sticky top-0 z-50 font-mono"
+>
+  <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+    {/* LOGO: TERMINAL PROMPT */}
+    <a
+      href="/"
+      class="flex items-center gap-2 text-sm font-bold hover:text-green-400 transition-colors group"
+    >
+      <Terminal size={18} class="group-hover:animate-pulse" />
+      <span>~/luke-brannagan</span>
+    </a>
+
+    {/* NAVIGATION LINKS */}
+    <div class="flex items-center gap-6 text-xs md:text-sm">
+      {
+        navLinks.map((link) => (
+          <a
+            href={link.href}
+            class="relative flex items-center gap-2 text-text/60 hover:text-text transition-colors group"
+          >
+            {/* Icon (Hidden on mobile to save space, visible on desktop) */}
+            <span class="hidden md:block">
+              <link.icon size={14} />
+            </span>
+
+            {/* Label with brackets on hover */}
+            <span>
+              <span class="opacity-0 group-hover:opacity-100 transition-opacity text-blue-400">
+                [
+              </span>
+              {link.label}
+              <span class="opacity-0 group-hover:opacity-100 transition-opacity text-blue-400">
+                ]
+              </span>
+            </span>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</nav>
