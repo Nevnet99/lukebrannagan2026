@@ -1,52 +1,177 @@
 ---
-import { Terminal, BookOpen, FileText, Home } from "@lucide/astro";
+import { Terminal, BookOpen, FileText, Home, Menu, X } from "@lucide/astro";
 
 const navLinks = [
   { label: "HOME", href: "/", icon: Home },
   { label: "BLOG", href: "/blog", icon: BookOpen },
-  { label: "CV", href: "/cv", icon: FileText }, // Or point to /assets/Luke_Brannagan_CV.pdf
+  { label: "CV", href: "/cv", icon: FileText },
 ];
+
+const pathname = Astro.url.pathname;
 ---
 
-<nav
-  class="w-full border-b border-text/10 bg-background/80 backdrop-blur-md sticky top-0 z-50 font-mono"
+<header
+  id="navbar"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 transform translate-y-0"
 >
-  <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-    {/* LOGO: TERMINAL PROMPT */}
-    <a
-      href="/"
-      class="flex items-center gap-2 text-sm font-bold hover:text-green-400 transition-colors group"
-    >
-      <Terminal size={18} class="group-hover:animate-pulse" />
-      <span>~/luke-brannagan</span>
-    </a>
+  <div
+    class="relative w-full border-b border-text/10 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60"
+  >
+    <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a
+        href="/"
+        class="flex items-center gap-2 text-sm font-bold hover:text-green-400 transition-colors group z-50 relative"
+      >
+        <Terminal
+          size={18}
+          class="text-text/60 group-hover:text-green-400 transition-colors"
+        />
+        <span class="tracking-tight">
+          ~/luke-brannagan<span class="animate-pulse text-green-400">_</span>
+        </span>
+      </a>
 
-    {/* NAVIGATION LINKS */}
-    <div class="flex items-center gap-6 text-xs md:text-sm">
+      <nav
+        class="hidden md:flex items-center gap-8 text-xs font-mono font-bold tracking-widest"
+      >
+        {
+          navLinks.map((link) => {
+            const isActive =
+              pathname === link.href ||
+              (link.href !== "/" && pathname.startsWith(link.href));
+            return (
+              <a
+                href={link.href}
+                class={`relative group flex items-center gap-2 transition-colors duration-300 ${
+                  isActive ? "text-green-400" : "text-text/60 hover:text-text"
+                }`}
+              >
+                <span class="opacity-0 group-hover:opacity-100 transition-opacity text-green-400 translate-x-1 group-hover:translate-x-0 duration-300">
+                  [
+                </span>
+                <span class="relative">
+                  {link.label}
+                  {isActive && (
+                    <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 bg-green-400 rounded-full shadow-[0_0_8px_rgba(74,222,128,0.8)]" />
+                  )}
+                </span>
+                <span class="opacity-0 group-hover:opacity-100 transition-opacity text-green-400 -translate-x-1 group-hover:translate-x-0 duration-300">
+                  ]
+                </span>
+              </a>
+            );
+          })
+        }
+      </nav>
+
+      <button
+        id="menu-toggle"
+        class="md:hidden relative z-50 p-2 -mr-2 text-text/60 hover:text-text transition-colors focus:outline-none"
+        aria-label="Toggle Menu"
+      >
+        <Menu
+          id="icon-menu"
+          size={24}
+          class="transition-transform duration-300"
+        />
+        <X
+          id="icon-close"
+          size={24}
+          class="absolute top-2 left-2 opacity-0 scale-75 transition-all duration-300"
+        />
+      </button>
+    </div>
+
+    <div
+      id="mobile-menu"
+      class="absolute top-0 left-0 w-full h-screen bg-background/95 backdrop-blur-xl border-b border-text/10 pt-24 px-6 flex flex-col gap-6 transform -translate-y-[120%] transition-transform duration-500 ease-in-out md:hidden"
+    >
       {
-        navLinks.map((link) => (
+        navLinks.map((link, index) => (
           <a
             href={link.href}
-            class="relative flex items-center gap-2 text-text/60 hover:text-text transition-colors group"
+            class="mobile-link flex items-center gap-4 text-xl font-bold font-mono text-text/60 hover:text-green-400 transition-colors border-b border-text/5 pb-4"
+            style={`transition-delay: ${index * 50}ms`}
           >
-            {/* Icon (Hidden on mobile to save space, visible on desktop) */}
-            <span class="hidden md:block">
-              <link.icon size={14} />
-            </span>
-
-            {/* Label with brackets on hover */}
-            <span>
-              <span class="opacity-0 group-hover:opacity-100 transition-opacity text-blue-400">
-                [
-              </span>
-              {link.label}
-              <span class="opacity-0 group-hover:opacity-100 transition-opacity text-blue-400">
-                ]
-              </span>
-            </span>
+            <div class="w-10 h-10 border border-text/10 rounded-sm flex items-center justify-center bg-text/5">
+              <link.icon size={20} />
+            </div>
+            <span>{link.label}</span>
+            <span class="ml-auto opacity-20 text-xs">0{index + 1}</span>
           </a>
         ))
       }
     </div>
   </div>
-</nav>
+</header>
+
+<script>
+  // Define the logic in a function so we can re-run it
+  const initNavbar = () => {
+    // --- SELECTORS (Get fresh elements every time) ---
+    const navbar = document.getElementById("navbar");
+    const toggleBtn = document.getElementById("menu-toggle");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const iconMenu = document.getElementById("icon-menu");
+    const iconClose = document.getElementById("icon-close");
+    const mobileLinks = document.querySelectorAll(".mobile-link");
+
+    let lastScrollY = window.scrollY;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (Math.abs(currentScrollY - lastScrollY) > 10) {
+        if (currentScrollY > lastScrollY && currentScrollY > 50) {
+          navbar?.classList.add("-translate-y-full");
+        } else {
+          navbar?.classList.remove("-translate-y-full");
+        }
+        lastScrollY = currentScrollY;
+      }
+    };
+
+    window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    let isMenuOpen = false;
+
+    const toggleMenu = () => {
+      isMenuOpen = !isMenuOpen;
+      updateMenuState();
+    };
+
+    const closeMenu = () => {
+      isMenuOpen = false;
+      updateMenuState();
+    };
+
+    const updateMenuState = () => {
+      if (isMenuOpen) {
+        // Open
+        mobileMenu?.classList.remove("-translate-y-[120%]");
+        iconMenu?.classList.add("opacity-0", "rotate-90", "scale-75");
+        iconClose?.classList.remove("opacity-0", "scale-75");
+        iconClose?.classList.add("rotate-0", "opacity-100", "scale-100");
+        document.body.style.overflow = "hidden";
+      } else {
+        // Close
+        mobileMenu?.classList.add("-translate-y-[120%]");
+        iconMenu?.classList.remove("opacity-0", "rotate-90", "scale-75");
+        iconClose?.classList.add("opacity-0", "scale-75");
+        iconClose?.classList.remove("rotate-0", "opacity-100", "scale-100");
+        document.body.style.overflow = "";
+      }
+    };
+
+    toggleBtn?.addEventListener("click", toggleMenu);
+
+    mobileLinks.forEach((link) => {
+      link.addEventListener("click", closeMenu);
+    });
+  };
+
+  initNavbar();
+
+  document.addEventListener("astro:after-swap", initNavbar);
+</script>

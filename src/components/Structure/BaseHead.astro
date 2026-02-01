@@ -5,6 +5,7 @@ import type { ImageMetadata } from "astro";
 import FallbackImage from "../../assets/blog-placeholder-1.jpg";
 import { SITE_TITLE } from "../../consts";
 import { ClientRouter } from "astro:transitions";
+import Posthog from "../../lib/Posthog.astro";
 
 interface Props {
   title: string;
@@ -52,4 +53,20 @@ const { title, description, image = FallbackImage } = Astro.props;
   <meta property="twitter:title" content={title} />
   <meta property="twitter:description" content={description} />
   <meta property="twitter:image" content={new URL(image.src, Astro.url)} />
+
+  <!-- Content Security Policy  -->
+  <meta
+    http-equiv="Content-Security-Policy"
+    content="
+    default-src 'self'; 
+    script-src 'self' 'unsafe-inline' https://eu.i.posthog.com https://us.i.posthog.com https://eu-assets.i.posthog.com https://us-assets.i.posthog.com; 
+    connect-src 'self' https://eu.i.posthog.com https://us.i.posthog.com https://eu-assets.i.posthog.com https://us-assets.i.posthog.com https://api.github.com; 
+    img-src 'self' data: https://avatars.githubusercontent.com https://github.com https://user-images.githubusercontent.com; 
+    style-src 'self' 'unsafe-inline'; 
+    font-src 'self'; 
+    frame-src 'self';
+  "
+  />
+
+  <Posthog />
 </head>

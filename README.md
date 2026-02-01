@@ -1,62 +1,36 @@
-# Astro Starter Kit: Blog
+# Luke Brannagan | Senior Frontend Engineer Portfolio
 
-```sh
-npm create astro@latest -- --template blog
-```
+![System Status](https://img.shields.io/badge/System_Status-Online-4ade80?style=flat-square)
+![Astro](https://img.shields.io/badge/Built_with-Astro-orange?style=flat-square&logo=astro)
+![TypeScript](https://img.shields.io/badge/Language-TypeScript-blue?style=flat-square&logo=typescript)
+![Tailwind](https://img.shields.io/badge/Style-Tailwind_CSS-38bdf8?style=flat-square&logo=tailwindcss)
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+A high-performance personal portfolio built with **Astro** and **React**, modeled after a terminal/system interface. This project emphasizes clean architecture, accessibility (a11y), and privacy-first observability.
 
-Features:
+## ⚡️ Key Features
 
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and OpenGraph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
+* **Privacy-First Analytics:** Custom-built Cookie Consent integrating **PostHog** with strict GDPR compliance (Opt-in only).
+* **High Performance:** Statically generated (SSG) for 100/100 Lighthouse scores.
+* **Strict CSP:** configured `Content-Security-Policy` for production security.
 
-## 🚀 Project Structure
+## 🛠 Tech Stack
 
-Inside of your Astro project, you'll see the following folders and files:
+* **Core:** [Astro 5.0](https://astro.build/)
+* **Styling:** Tailwind CSS + Lucide Icons
+* **Scripting:** TypeScript
+* **State:** Nano Stores / LocalStorage
+* **Telemetry:** PostHog (Analytics)
+
+## 📂 Architecture
+
+The project follows a domain-driven structure to keep the codebase modular and maintainable.
 
 ```text
-├── public/
-├── src/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
-├── astro.config.mjs
-├── README.md
-├── package.json
-└── tsconfig.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
-
-## Credit
-
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+src/
+├── components/         # Reusable UI components
+│   ├── UI/             # Composite components (Navbar, Projects, CommandPalette)
+│   ├── DS/             # Design System primitives (Avatar, Tag, Button)
+│   └── Structure/      # Layout containers (PageSection, Grid)
+├── layouts/            # Page layouts (BaseLayout)
+├── pages/              # File-based routing
+└── utils/              # Pure helper functions

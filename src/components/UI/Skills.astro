@@ -12,6 +12,8 @@ import Card from "../DS/Card.astro";
 import Tag from "../DS/Tag.astro";
 import Stack from "../DS/Stack.astro";
 import Heading from "../DS/Heading.astro";
+import SectionHeading from "../SectionHeading.astro";
+import PageSection from "../Structure/PageSection.astro";
 
 const skillGroups = [
   {
@@ -54,18 +56,8 @@ const skillGroups = [
 ];
 ---
 
-<section class="max-w-5xl mx-auto px-6 py-20 font-mono">
-  <div class="flex items-center gap-3 mb-12 border-b border-text/10 pb-4">
-    <Terminal size={20} class="text-text/60" />
-    <Heading renderAs="h2">
-      Technical Arsenal
-      <span
-        class="text-text/40 text-lg font-normal ml-4 hidden sm:inline-block"
-      >
-        &gt; npm list --depth=0
-      </span>
-    </Heading>
-  </div>
+<PageSection>
+  <SectionHeading>skills</SectionHeading>
 
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     {
@@ -74,7 +66,7 @@ const skillGroups = [
           <fragment slot="header">
             <group.icon
               size={16}
-              class="text-text/60 group-hover:text-blue-400 transition-colors"
+              class="text-text/60 group-hover:text-green-400 transition-colors"
             />
             <span class="text-sm font-bold uppercase tracking-wider">
               {group.title}
@@ -90,12 +82,4 @@ const skillGroups = [
       ))
     }
   </div>
-
-  <div
-    class="flex justify-end mt-4 text-[10px] text-text/40 uppercase tracking-widest"
-  >
-    [ MEMORY_USAGE: 24MB ] [ MODULES_LOADED: {
-      skillGroups.reduce((acc, g) => acc + g.skills.length, 0)
-    } ]
-  </div>
-</section>
+</PageSection>

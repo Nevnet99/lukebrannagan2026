@@ -1,5 +1,6 @@
 ---
 import BaseHead from "../components/Structure/BaseHead.astro";
+import CookieConsent from "../components/Structure/CookieConsent.astro";
 import Footer from "../components/Structure/Footer.astro";
 import Navbar from "../components/Structure/Navbar.astro";
 
@@ -25,6 +26,7 @@ const {
   <BaseHead title={title} description={description} />
 
   <body class="min-h-full font-sans antialiased bg-background text-text">
+    <CookieConsent />
     <Navbar />
     <a
       class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-white px-3 py-2 rounded shadow"
@@ -39,3 +41,32 @@ const {
     <Footer />
   </body>
 </html>
+<script>
+  // Smooth Scrolling with Lenis
+  import Lenis from "lenis";
+
+  if (!window.lenis) {
+    window.lenis = new Lenis({
+      duration: 1.2,
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+    });
+
+    function raf(time: number) {
+      window.lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+  }
+
+  document.addEventListener("astro:before-swap", () => {
+    window.lenis.stop();
+  });
+
+  document.addEventListener("astro:page-load", () => {
+    window.lenis.start();
+
+    window.lenis.resize();
+  });
+</script>

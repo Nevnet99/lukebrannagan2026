@@ -1,0 +1,77 @@
+---
+import { Settings, Cpu } from "@lucide/astro";
+
+const config = [
+  { key: "EDITOR", value: "VS Code (Neovim mode)" },
+  { key: "TERMINAL", value: "Warp / iTerm2" },
+  { key: "FONT", value: "JetBrains Mono" },
+  { key: "THEME", value: "Catppuccin Mocha" },
+  { key: "STACK_PREF", value: ["React", "TypeScript", "Tailwind"] }, // Array for visual variety
+  { key: "MUSIC", value: "Lo-Fi / Synthwave" },
+  { key: "LOCATION", value: "United Kingdom" },
+];
+---
+
+<section class="max-w-4xl mx-auto px-6 py-24 font-mono">
+  <div class="flex items-center gap-3 mb-8">
+    <Settings size={20} class="text-text/60" />
+    <h2 class="text-2xl font-bold tracking-tight">System_Config</h2>
+  </div>
+
+  <div
+    class="border border-text/20 bg-[#1e1e1e] rounded-sm p-6 md:p-10 shadow-2xl"
+  >
+    {/* Filename Header */}
+    <div
+      class="flex items-center justify-between text-xs text-text/40 mb-6 border-b border-white/10 pb-4"
+    >
+      <span class="flex items-center gap-2">
+        <Cpu size={14} />
+        .env.local
+      </span>
+      <span>4.2kb</span>
+    </div>
+
+    {/* The Code Content */}
+    <div class="space-y-3 font-mono text-sm md:text-base">
+      {
+        config.map((item) => (
+          <div class="flex flex-col md:flex-row md:items-start">
+            {/* Key */}
+            <span class="text-blue-400 min-w-[140px] font-bold">
+              {item.key}=
+            </span>
+
+            {/* Value */}
+            <span class="text-[#ce9178]">
+              {Array.isArray(item.value) ? (
+                <span>
+                  <span class="text-white/40">[</span>
+                  {item.value.map((v, i) => (
+                    <>
+                      <span class="text-[#ce9178]">"{v}"</span>
+                      {i < item.value.length - 1 && (
+                        <span class="text-white/40">, </span>
+                      )}
+                    </>
+                  ))}
+                  <span class="text-white/40">]</span>
+                </span>
+              ) : (
+                `"${item.value}"`
+              )}
+            </span>
+
+            {/* Optional Comment for flair */}
+            <span class="hidden md:inline-block text-gray-500 ml-4 select-none">
+              # {item.key === "EDITOR" ? "Vim is life" : "Optimized"}
+            </span>
+          </div>
+        ))
+      }
+
+      {/* Blinking Cursor at bottom */}
+      <div class="text-blue-400 mt-2 animate-pulse">_</div>
+    </div>
+  </div>
+</section>

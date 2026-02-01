@@ -1,0 +1,89 @@
+---
+import { Book, ArrowUpRight, FileText } from "@lucide/astro";
+import { getCollection } from "astro:content";
+import SectionHeading from "../SectionHeading.astro";
+import PageSection from "../Structure/PageSection.astro";
+
+const posts = (await getCollection("blog"))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+---
+
+<PageSection class="max-w-5xl mx-auto pb-24 font-mono">
+  <SectionHeading>
+    <Book slot="icon" size={20} class="text-text/60" />library
+    <a
+      slot="action"
+      href="/blog"
+      class="text-xs font-bold text-green-400 hover:text-green-300 flex items-center gap-1 uppercase tracking-widest"
+    >
+      cd /blog
+      <ArrowUpRight size={12} />
+    </a>
+  </SectionHeading>
+
+  <div class="flex items-center justify-between mb-10"></div>
+
+  {/* TERMINAL LISTING */}
+  <div class="border-t border-text/10 bg-background/50">
+    {/* Table Header (Desktop) */}
+    <div
+      class="hidden md:flex text-xs text-text/30 py-3 px-4 uppercase tracking-widest border-b border-text/5"
+    >
+      <div class="w-32">Date</div>
+      <div class="w-24">Size</div>
+      <div class="flex-1">Filename</div>
+    </div>
+
+    {/* List Items */}
+    <div class="divide-y divide-text/10">
+      {
+        posts.map((post) => (
+          <a
+            href={`/blog/${post.id}`}
+            class="group flex flex-col md:flex-row md:items-center py-4 px-4 hover:bg-text/5 transition-colors duration-300"
+          >
+            {console.log(post)}
+            {/* Mobile: Date & Size Top Row */}
+            <div class="flex md:hidden text-xs text-text/40 font-mono mb-2 gap-4">
+              <span>
+                {post.data.pubDate.toLocaleDateString("en-uk", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                })}
+              </span>
+            </div>
+
+            {/* Desktop: Date */}
+            <div class="hidden md:block w-32 text-xs text-text/50 font-mono">
+              {post.data.pubDate.toLocaleDateString("en-uk", {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              })}
+            </div>
+
+            {/* Desktop: Size/Time */}
+            <div class="hidden md:block w-24 text-xs text-text/40 font-mono">
+              {Math.max(1, Math.floor(post?.body.length / 1024))}kb
+            </div>
+
+            {/* Filename / Title */}
+            <div class="flex-1 flex items-center gap-3 text-sm font-bold text-text/80 group-hover:text-green-400 transition-colors">
+              <FileText size={14} class="md:hidden text-text/30" />
+              {post.data.title}
+              <span class="text-text/30 font-normal hidden md:inline-block">
+                .md
+              </span>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+
+    <div class="py-3 px-4 text-xs text-text/20 font-mono">
+      {posts.length} files found.
+    </div>
+  </div>
+</PageSection>

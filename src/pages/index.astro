@@ -2,14 +2,24 @@
 import Experience from "../components/ui/Experience.astro";
 import Hero from "../components/ui/Hero.astro";
 import Skills from "../components/ui/Skills.astro";
+import StatusTicker from "../components/ui/StatusTicker.astro";
 import Projects from "../components/ui/Projects.astro";
+import Testimonials from "../components/ui/Testimonials.astro";
+import Contact from "../components/ui/Contact.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 import BaseLayout from "../layouts/Base.astro";
+import Principles from "../components/ui/Principles.astro";
+import Writing from "../components/ui/Writing.astro";
 ---
 
 <BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
   <Hero />
-  <Experience />
+  <StatusTicker />
   <Skills />
+  <Experience />
+  <Testimonials />
+  <Contact />
+  <Principles />
+  <Writing />
   <Projects />
 </BaseLayout>

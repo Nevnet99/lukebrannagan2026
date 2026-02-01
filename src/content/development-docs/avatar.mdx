@@ -1,0 +1,39 @@
+---
+title: Avatar
+description: A static, presentational component used to represent a user profile when no specific profile image is available.
+order: 7
+---
+
+## Overview
+The `Avatar` component is a static, presentational element used to represent a user profile when no specific profile image is available. It follows the system's "Terminal/Green" aesthetic, utilizing a distinct `green-400` color palette with a translucent background.
+
+It is primarily used in the **Testimonials** section to represent authors.
+
+### Import
+
+```astro
+import Avatar from "../components/DS/Avatar.astro";
+```
+
+### Usage
+
+```astro
+---
+import Avatar from "../components/DS/Avatar.astro";
+---
+
+<div class="flex items-center gap-4">
+  <Avatar />
+  <div>
+    <p>User Name</p>
+  </div>
+</div>
+```
+
+### Props
+
+Prop | Type | Default | Description
+--- | ---- | ------- | -----------
+N/A | - | - | The component is strictly presentational.
+
+

@@ -1,0 +1,14 @@
+# Allow all standard crawlers
+User-agent: *
+Allow: /
+
+# Block access to the 404 page directly to prevent soft-404 errors
+Disallow: /404
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+Sitemap: https://lukebrannagan.com/sitemap-index.xml

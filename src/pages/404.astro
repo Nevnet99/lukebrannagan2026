@@ -1,0 +1,28 @@
+---
+import BaseLayout from "../layouts/Base.astro";
+import { AlertTriangle, ArrowLeft } from "@lucide/astro";
+---
+
+<BaseLayout title="404 | Not Found">
+  <div
+    class="h-[100vh] flex flex-col items-center justify-center text-center px-6"
+  >
+    <AlertTriangle size={64} class="text-red-500 mb-6 animate-pulse" />
+    <h1 class="text-4xl font-mono font-bold mb-2">Error 404</h1>
+    <p class="text-text/60 font-mono mb-8">
+      System.IO.FileNotFoundException: The requested resource could not be
+      located.
+    </p>
+
+    <a
+      href="/"
+      class="group flex items-center gap-2 px-6 py-3 bg-text/10 hover:bg-text/20 rounded font-mono text-sm transition-colors"
+    >
+      <ArrowLeft
+        size={16}
+        class="group-hover:-translate-x-1 transition-transform"
+      />
+      cd ~/home
+    </a>
+  </div>
+</BaseLayout>

@@ -1,5 +1,6 @@
 ---
 import { type CollectionEntry, getCollection, render } from "astro:content";
+import { ArrowLeft } from "@lucide/astro"; // Import the icon
 import Base from "../../layouts/Base.astro";
 import { SITE_TITLE } from "../../consts";
 
@@ -25,13 +26,27 @@ const { Content } = await render(post);
     : undefined}
 >
   <article class="max-w-3xl mx-auto px-4 py-12">
+    {/* --- BACK BUTTON ADDITION --- */}
+    <div class="mb-10">
+      <a
+        href="/"
+        class="group inline-flex items-center gap-2 text-sm font-mono text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+      >
+        <ArrowLeft
+          size={16}
+          class="group-hover:-translate-x-1 transition-transform duration-300"
+        />
+        <span>cd ~/portfolio</span>
+      </a>
+    </div>
+
     {/* Header Section */}
     <div class="mb-8 text-center">
       {
         post.data.heroImage && (
           <div class="mb-8 rounded-lg overflow-hidden shadow-sm">
             <img
-              src={post.data.heroImage}
+              src={post.data.heroImage.src}
               alt={post.data.title}
               class="w-full h-auto object-cover"
             />

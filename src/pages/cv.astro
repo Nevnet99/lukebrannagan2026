@@ -1,4 +1,6 @@
 ---
+import ExperienceTimeline from "../components/ExperienceTimeline.astro";
+import Experience from "../components/ui/Experience.astro";
 import BaseLayout from "../layouts/Base.astro";
 
 import {
@@ -209,41 +211,6 @@ const jobs = [
       </div>
     </section>
 
-    {/* --- EXPERIENCE --- */}
-    <section class="space-y-12">
-      <h3
-        class="font-mono text-sm uppercase tracking-widest text-text/40 mb-6 flex items-center gap-2"
-      >
-        <Terminal size={14} /> Work Experience
-      </h3>
-
-      {
-        jobs.map((job) => (
-          <div class="relative pl-8 border-l border-text/10 space-y-2 group">
-            {/* Timeline Dot */}
-            <div class="absolute -left-[5px] top-2 w-2.5 h-2.5 rounded-full bg-text/20 group-hover:bg-purple-400 transition-colors" />
-
-            <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
-              <h4 class="text-xl font-bold text-text">{job.role}</h4>
-              <span class="font-mono text-xs text-text/50">{job.date}</span>
-            </div>
-
-            <div class="text-purple-300 font-medium text-sm mb-4">
-              @ {job.company}
-            </div>
-
-            {job.summary ? (
-              <p class="text-text/80 text-sm">{job.summary}</p>
-            ) : (
-              <ul class="list-disc ml-4 space-y-2 text-text/80 marker:text-text/30">
-                {job.points?.map((point) => (
-                  <li set:html={point} />
-                ))}
-              </ul>
-            )}
-          </div>
-        ))
-      }
-    </section>
+    <ExperienceTimeline />
   </div>
 </BaseLayout>

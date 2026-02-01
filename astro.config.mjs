@@ -6,10 +6,9 @@ import { defineConfig } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
 
-// https://astro.build/config
 export default defineConfig({
   prefetch: true,
-  site: 'https://example.com',
+  site: 'https://lukebrannagan.com',
   integrations: [mdx(), sitemap()],
 
   vite: {

@@ -1,0 +1,59 @@
+---
+import { Mail, Terminal } from "@lucide/astro";
+import PageSection from "../Structure/PageSection.astro";
+
+const email = "luke@brannagan.co";
+---
+
+<PageSection class="max-w-6xl mx-auto px-6 py-20 font-mono">
+  <div
+    class="relative group border border-text/20 bg-background overflow-hidden hover:border-text/50 transition-colors duration-300"
+  >
+    <div
+      class="absolute inset-0 opacity-[0.03] bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"
+    >
+    </div>
+
+    <div
+      class="relative p-8 md:p-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-8"
+    >
+      <div class="space-y-4">
+        <div
+          class="flex items-center gap-2 text-green-400 text-xs font-bold uppercase tracking-widest"
+        >
+          <span class="relative flex h-2 w-2">
+            <span
+              class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"
+            ></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"
+            ></span>
+          </span>
+          System_Online
+        </div>
+
+        <h2 class="text-3xl font-bold tracking-tight">Ready to deploy?</h2>
+        <p class="text-text/60 max-w-md text-sm leading-relaxed">
+          I'm currently looking for new opportunities. If you need a frontend
+          engineer who cares about performance and accessibility, let's talk.
+        </p>
+      </div>
+
+      <a
+        href={`mailto:${email}`}
+        class="group/btn relative inline-flex items-center gap-3 px-6 py-4 bg-text text-background font-bold text-sm hover:bg-green-400 hover:text-white transition-all duration-300"
+      >
+        <Mail size={16} />
+        <span>{email}</span>
+        <Terminal
+          size={14}
+          class="opacity-0 -ml-2 group-hover/btn:opacity-100 group-hover/btn:ml-0 transition-all duration-300"
+        />
+      </a>
+    </div>
+
+    <div
+      class="absolute bottom-0 left-0 w-full h-1 bg-text/5 group-hover:bg-green-400/50 transition-colors duration-500"
+    >
+    </div>
+  </div>
+</PageSection>

@@ -1,0 +1,20 @@
+---
+import { Terminal } from "@lucide/astro";
+import Heading from "./DS/Heading.astro";
+---
+
+<div class="flex items-center gap-3 mb-12 border-b border-text/10 pb-4">
+  <slot name="icon">
+    <Terminal size={20} class="text-text/60" />
+  </slot>
+
+  <Heading renderAs="h2"> ~/<slot /> </Heading>
+
+  {
+    Astro.slots.has("action") && (
+      <div class="ml-auto">
+        <slot name="action" />
+      </div>
+    )
+  }
+</div>
