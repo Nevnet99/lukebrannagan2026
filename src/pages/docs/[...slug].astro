@@ -1,0 +1,22 @@
+---
+import { getCollection, render } from "astro:content";
+import SystemLayout from "../../layouts/SystemLayout.astro";
+
+export async function getStaticPaths() {
+  const docs = await getCollection("developerDocs");
+  return docs.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<SystemLayout title={entry.data.title}>
+  <div class="prose prose-invert max-w-none">
+    <h1>{entry.data.title}</h1>
+    <Content />
+  </div>
+</SystemLayout>

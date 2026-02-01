@@ -1,6 +1,10 @@
 ---
 import { Github, Layers, ArrowUpRight, Signal } from "@lucide/astro";
 
+import Card from "../DS/Card.astro";
+import Heading from "../DS/Heading.astro";
+import Text from "../DS/Text.astro";
+
 // --- DATA CONFIGURATION ---
 const projects = [
   {
@@ -48,87 +52,33 @@ const getStatusColor = (status: string) => {
 ---
 
 <section class="max-w-5xl mx-auto px-6 py-20 font-mono">
-  {/* SECTION HEADER */}
   <div class="flex items-center gap-3 mb-12 border-b border-text/10 pb-4">
     <Layers size={20} class="text-text/60" />
-    <h2 class="text-2xl font-bold tracking-tight">
+    <Heading renderAs="h2">
       Deployed Units
       <span
         class="text-text/40 text-lg font-normal ml-4 hidden sm:inline-block"
       >
         / Side_Projects
       </span>
-    </h2>
+    </Heading>
   </div>
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
     {
       projects.map((project) => (
-        <div class="group relative border border-text/20 bg-background p-6 hover:border-text/50 transition-all duration-300 hover:-translate-y-1">
-          {/* Status Indicator (Top Right) */}
-          <div class="absolute top-4 right-4 flex items-center gap-2">
-            <span class="text-[10px] uppercase text-text/40 tracking-wider font-bold">
-              [{project.status}]
-            </span>
-            <div
-              class={`w-2 h-2 rounded-full ${getStatusColor(project.status)}`}
-            />
+        <Card interactive padding="md">
+          <Heading renderAs="h3">{project.title}</Heading>
+          <Text>{project.description}</Text>
+
+          <div slot="footer" class="flex justify-between">
+            <a href="#">View Source</a>
+            <ArrowUpRight />
           </div>
-
-          {/* Title */}
-          <h3 class="text-xl font-bold mb-3 flex items-center gap-2">
-            {project.title}
-          </h3>
-
-          {/* Description */}
-          <p class="text-sm text-text/70 leading-relaxed mb-6 h-auto md:h-20">
-            {project.description}
-          </p>
-
-          {/* Tech Stack Pills */}
-          <div class="flex flex-wrap gap-2 mb-8">
-            {project.tech.map((t) => (
-              <span class="text-xs border border-text/10 px-2 py-1 text-text/60 bg-text/5">
-                {t}
-              </span>
-            ))}
-          </div>
-
-          {/* Actions (Bottom Bar) */}
-          <div class="flex items-center gap-4 mt-auto border-t border-text/10 pt-4">
-            {project.liveUrl !== "#" && (
-              <a
-                href={project.liveUrl}
-                target="_blank"
-                class="flex items-center gap-2 text-xs font-bold hover:text-blue-400 transition-colors"
-              >
-                <Signal size={14} />
-                <span>LIVE_DEMO</span>
-              </a>
-            )}
-
-            {project.repoUrl !== "#" && (
-              <a
-                href={project.repoUrl}
-                target="_blank"
-                class="flex items-center gap-2 text-xs font-bold hover:text-blue-400 transition-colors"
-              >
-                <Github size={14} />
-                <span>SOURCE</span>
-              </a>
-            )}
-
-            {/* Decorative Arrow */}
-            <ArrowUpRight
-              size={14}
-              class="ml-auto text-text/20 group-hover:text-blue-400 transition-colors"
-            />
-          </div>
-        </div>
+        </Card>
       ))
     }
 
-    {/* "Incoming" Placeholder Card (Optional, fills grid) */}
     <div
       class="border border-dashed border-text/20 bg-background/30 p-6 flex flex-col items-center justify-center text-center opacity-50 hover:opacity-100 transition-opacity"
     >

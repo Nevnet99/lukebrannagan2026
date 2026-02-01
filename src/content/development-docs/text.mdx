@@ -1,0 +1,106 @@
+---
+title: Text
+description: A versatile component for body copy, labels, and auxiliary text.
+order: 4
+---
+
+import Text from '../../components/DS/Text.astro';
+import Stack from '../../components/DS/Stack.astro';
+
+The `Text` component handles all non-heading typography. It standardizes font sizes, leading (line-height), and text color opacity to ensure readability and visual consistency across the application.
+
+---
+
+### Variants
+
+#### Body (Default)
+Used for standard paragraphs. It includes a `max-w-xl` constraint to ensure optimal reading line length (60-75 chars).
+
+<div class="p-6 border border-text/10 rounded-lg not-prose bg-background/50">
+  <Text>
+    I build scalable Design Systems and high-performance web applications. Currently modernizing legacy architectures at Kroo and migrating platforms to Vite & Next.js.
+  </Text>
+</div>
+
+```jsx
+<Text>
+  I build scalable Design Systems and high-performance web applications.
+</Text>
+```
+
+#### Overline
+Used for "eyebrow" text, labels, or section identifiers. It applies uppercase transformation and wide tracking.
+
+<div class="p-6 border border-text/10 rounded-lg not-prose bg-background/50">
+  <Stack gap="1">
+    <Text variant="overline">Core Stack</Text>
+    <div class="h-2 w-full bg-text/10 rounded"></div>
+  </Stack>
+</div>
+
+```jsx
+<Text variant="overline">Core Stack</Text>
+```
+
+#### Body Small
+Used for metadata, timestamps, or disclaimer text.
+
+<div class="p-6 border border-text/10 rounded-lg not-prose bg-background/50">
+<Text variant="body-small">Last updated: Feb 2026</Text>
+</div>
+
+```jsx
+<Text variant="body-small">Last updated: Feb 2026</Text>
+```
+#### Formatting
+Bold
+Use the isBold prop to increase font weight without writing custom CSS.
+
+<div class="p-6 border border-text/10 rounded-lg not-prose bg-background/50">
+<Text variant="body-small" isBold>14 Repositories</Text>
+</div>
+
+```jsx
+<Text variant="body-small" isBold>14 Repositories</Text>
+```
+
+#### Polymorphism
+By default, the component renders a `<p>` tag. Use `renderAs="span"` when nesting text inside other block elements to maintain valid HTML.
+
+<div class="p-6 border border-text/10 rounded-lg not-prose bg-background/50">
+  <div class="flex items-center gap-2">
+    <div class="w-2 h-2 rounded-full bg-green-400"></div>
+    <Text renderAs="span" variant="body-small">System Operational</Text>
+  </div>
+</div>
+
+```jsx
+<div class="flex items-center gap-2">
+  <StatusDot />
+  {/* Render as span to avoid p inside div if strict flex alignment is needed */}
+  <Text renderAs="span" variant="body-small">
+    System Operational
+  </Text>
+</div>
+```
+
+### Accessibility
+The Text component uses semantic HTML elements by default, ensuring proper structure for screen readers. Always choose
+appropriate variants for the context to maintain readability.
+
+tips for accessibility:
+- Use the body variant for longer paragraphs to ensure optimal line length.
+- Avoid using all caps for large blocks of text; reserve overline for short labels.
+- Ensure sufficient color contrast between text and background.
+
+### Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| variant | 'body' \| 'overline' \| 'body-small' |
+| renderAs | 'p' \| 'span' | 'p' | Semantic HTML tag. |
+| isBold | boolean | false | Toggles font-bold. |
+| class | string | undefined | Custom class overrides. |
+
+
+

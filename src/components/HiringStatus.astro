@@ -1,0 +1,9 @@
+---
+const { color } = Astro.props;
+
+type Props = {
+  color: string;
+};
+---
+
+<span class={`animate-pulse ${color}`}>● <slot /></span>

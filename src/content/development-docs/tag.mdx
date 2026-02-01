@@ -1,0 +1,82 @@
+---
+title: Tag
+description: A compact UI element for displaying metadata, labels, or status indicators.
+order: 5
+---
+
+import Tag from '../../components/DS/Tag.astro';
+import Stack from '../../components/DS/Stack.astro';
+
+The `Tag` component is a micro-typography element used to label content. It is significantly smaller than standard text and features a high-contrast border/background combination to visually separate metadata (like dates, categories, or status) from body content.
+
+---
+
+### Usage
+
+#### Basic Tags
+Tags are uppercase, bold, and monospaced by default. They are best used for quick-scan information.
+
+<div class="p-6 border border-text/10 rounded-lg not-prose bg-background/50">
+  <Stack type="row" gap="2">
+    <Tag>2026</Tag>
+    <Tag>Remote</Tag>
+    <Tag>TypeScript</Tag>
+  </Stack>
+</div>
+
+```jsx
+<Stack type="row" gap="2">
+  <Tag>2026</Tag>
+  <Tag>Remote</Tag>
+  <Tag>TypeScript</Tag>
+</Stack>
+```
+
+#### Custom Colors
+You can override the default gray appearance using utility classes. This is useful for status indicators (e.g., "Active", "New").
+
+<div class="p-6 border border-text/10 rounded-lg not-prose bg-background/50">
+  <Stack type="row" gap="2">
+    <Tag class="text-green-400 border-green-400/20 bg-green-400/5">Active</Tag>
+    <Tag class="text-blue-400 border-blue-400/20 bg-blue-400/5">Beta</Tag>
+  </Stack>
+</div>
+
+```jsx
+<Tag class="text-green-400 border-green-400/20 bg-green-400/5">
+  Active
+</Tag>
+```
+
+#### Context Example
+Tags are often paired with Heading or Text components to provide context.
+
+<div class="p-6 border border-text/10 rounded-lg not-prose bg-background/50">
+  <Stack gap="2">
+    <div class="flex items-center gap-3">
+      <h3 class="font-bold text-lg">Trading Engine</h3>
+      <Tag>In Progress</Tag>
+    </div>
+    <p class="text-text/60 text-sm">High-frequency matching engine written in Go.</p>
+  </Stack>
+</div>
+
+```jsx  
+<div class="flex items-center gap-3">
+  <Heading renderAs="h3">Trading Engine</Heading>
+  <Tag>In Progress</Tag>
+</div>
+```
+### Accessibility
+The `Tag` component uses semantic HTML elements (`<span>` or `<p>`) to ensure proper accessibility. Ensure that the content within the tag is concise and meaningful for screen readers.
+
+
+
+### Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| renderAs | 'span' \| 'p' | 'span' | Semantic HTML
+| class | string | undefined | Custom styling to override colors or margins. |
+
+

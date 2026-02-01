@@ -1,0 +1,62 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"div"> {
+  /** * If true, adds a hover lift effect */
+  interactive?: boolean;
+  /** * Padding for the main content area.
+   * 'none' is useful if you want full control or full-bleed images.
+   */
+  padding?: "none" | "sm" | "md";
+}
+
+const {
+  interactive = false,
+  padding = "md",
+  class: className,
+  ...props
+} = Astro.props;
+
+const shellStyles =
+  "group relative border border-text/20 bg-background transition-all duration-300 overflow-hidden flex flex-col h-full";
+
+const hoverStyles = interactive
+  ? "hover:border-text/50 hover:-translate-y-1"
+  : "hover:border-text/50";
+
+const paddingStyles = {
+  none: "",
+  sm: "p-4",
+  md: "p-6",
+};
+
+const hasHeader = Astro.slots.has("header");
+const hasFooter = Astro.slots.has("footer");
+---
+
+<article class:list={[shellStyles, hoverStyles, className]} {...props}>
+  {
+    hasHeader && (
+      <div class="flex items-center gap-2 px-4 py-3 border-b border-text/10 bg-text/5 shrink-0">
+        <slot name="header" />
+      </div>
+    )
+  }
+
+  <div class:list={["flex-1 min-h-0", paddingStyles[padding]]}>
+    <slot />
+  </div>
+
+  {
+    hasFooter && (
+      <div
+        class:list={[
+          "mt-auto border-t border-text/10 pt-4 shrink-0",
+          padding === "md" ? "mx-6 mb-6" : "mx-4 mb-4",
+        ]}
+      >
+        <slot name="footer" />
+      </div>
+    )
+  }
+</article>

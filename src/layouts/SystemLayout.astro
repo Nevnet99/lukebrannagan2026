@@ -1,0 +1,89 @@
+---
+import { getCollection } from "astro:content";
+import "../styles/global.css";
+import { Terminal, ArrowLeft, FileText } from "@lucide/astro";
+
+const { title } = Astro.props;
+
+const docs = await getCollection("developerDocs");
+const sortedDocs = docs.sort((a, b) => a.id.localeCompare(b.id));
+
+const currentPath = Astro.url.pathname;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Docs | {title}</title>
+    <meta name="robots" content="noindex, nofollow" />
+  </head>
+  <body
+    class="bg-background text-text font-mono flex flex-col md:flex-row min-h-screen"
+  >
+    <aside
+      class="w-full md:w-64 border-b md:border-b-0 md:border-r border-text/10 bg-background/50 backdrop-blur-md md:fixed md:h-full z-20 flex-shrink-0"
+    >
+      <div class="p-6 h-full flex flex-col">
+        <a
+          href="/"
+          class="flex items-center gap-2 text-text/60 hover:text-green-400 transition-colors mb-8 text-sm"
+        >
+          <ArrowLeft size={16} />
+          <span>Back to Portfolio</span>
+        </a>
+
+        <div class="flex items-center gap-2 font-bold text-xl mb-6">
+          <Terminal size={20} class="text-green-400" />
+          <span>~/docs</span>
+        </div>
+
+        <nav class="flex-1 overflow-y-auto space-y-1">
+          <a
+            href="/docs"
+            class:list={[
+              "block px-3 py-2 rounded-md text-sm transition-colors",
+              currentPath === "/docs" || currentPath === "/docs/"
+                ? "bg-text/10 text-green-400 font-bold"
+                : "text-text/70 hover:text-text hover:bg-text/5",
+            ]}
+          >
+            Overview
+          </a>
+
+          <div
+            class="pt-4 pb-2 text-xs uppercase tracking-widest text-text/40 font-bold"
+          >
+            Components
+          </div>
+
+          {
+            sortedDocs.map((doc) => {
+              const isActive = currentPath.includes(`/docs/${doc.id}`);
+              return (
+                <a
+                  href={`/docs/${doc.id}`}
+                  class:list={[
+                    "flex items-center gap-2 px-3 py-2 rounded-md text-sm transition-colors",
+                    isActive
+                      ? "bg-text/10 text-green-400 font-bold"
+                      : "text-text/70 hover:text-text hover:bg-text/5",
+                  ]}
+                >
+                  <FileText size={14} />
+                  {doc.data.title}
+                </a>
+              );
+            })
+          }
+        </nav>
+      </div>
+    </aside>
+
+    <main class="flex-1 md:ml-64 min-w-0">
+      <div class="max-w-4xl mx-auto p-6 md:p-12">
+        <slot />
+      </div>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,107 @@
+---
+title: Stack
+description: A primitive layout component for managing vertical and horizontal flow with consistent spacing.
+order: 2
+---
+
+import Stack from '../../components/DS/Stack.astro';
+import Button from '../../components/DS/Button.astro';
+
+The `Stack` component is the backbone of the layout system. It abstracts away repetitive Flexbox boilerplate (`flex`, `flex-col`, `gap-x`) to enforce consistent spacing and alignment across the application.
+
+It supports **vertical** and **horizontal** layouts, **responsive direction switching**, and **polymorphic rendering**.
+
+---
+
+### Layout Directions
+
+#### Vertical Stack (Default)
+Arranges items in a vertical column. This is the default behavior.
+
+<div class="p-6 border border-text/10 rounded-lg not-prose bg-background/50">
+  <Stack gap="4">
+    <div class="p-4 bg-text/10 rounded border border-text/5 text-center">Item 1</div>
+    <div class="p-4 bg-text/10 rounded border border-text/5 text-center">Item 2</div>
+    <div class="p-4 bg-text/10 rounded border border-text/5 text-center">Item 3</div>
+  </Stack>
+</div>
+
+```jsx
+<Stack gap="4">
+  <Card>Item 1</Card>
+  <Card>Item 2</Card>
+  <Card>Item 3</Card>
+</Stack>
+```
+
+#### Horizontal Stack
+
+Arranges items in a horizontal row. Ideal for button groups, tags, or navigation items.
+
+<div class="p-6 border border-text/10 rounded-lg not-prose bg-background/50">
+  <Stack type="row" gap="4" align="center">
+    <Button size="sm">Edit</Button>
+    <Button size="sm" variant="secondary">Delete</Button>
+    <div class="w-px h-6 bg-text/20"></div>
+    <span class="text-sm text-text/60">Last updated today</span>
+  </Stack>
+</div>
+
+####  Responsive Layouts
+The type prop accepts an object to change direction based on breakpoints. This is useful for layouts that need to stack on mobile (col) but sit side-by-side on desktop (row).
+
+<div class="p-6 border border-text/10 rounded-lg not-prose bg-background/50">
+  <Stack type={{ initial: 'col', md: 'row' }} gap="4" align="stretch">
+    <div class="p-4 bg-green-400/10 border border-green-400/20 text-green-400 rounded text-center flex-1">
+    Mobile: Stacked
+    </div>
+    <div class="p-4 bg-blue-400/10 border border-blue-400/20 text-blue-400 rounded text-center flex-1">
+    Desktop: Row
+    </div>
+  </Stack>
+</div>
+
+```jsx
+// 📱 Mobile: Column
+// 💻 Desktop: Row
+<Stack type={{ initial: 'col', md: 'row' }} gap="4">
+  <Sidebar />
+  <Content />
+</Stack>
+```
+
+####  Polymorphism (Semantics)
+By default, Stack renders a `<div>`. You can use the renderAs prop to render semantic HTML elements like `<ul>`, `<section>`, or `<form>` while keeping the layout behavior.
+
+<div class="p-6 border border-text/10 rounded-lg not-prose bg-background/50">
+  <Stack renderAs="ul" gap="2">
+    <li class="p-2 border border-text/10 rounded bg-background">Semantic List Item 1</li>
+    <li class="p-2 border border-text/10 rounded bg-background">Semantic List Item 2</li>
+  </Stack>
+</div>
+
+```jsx
+  <Stack renderAs="ul" gap="4">
+    <li>List Item 1</li>
+    <li>List Item 2</li>
+  </Stack>
+
+  <Stack renderAs="form" gap="6" onSubmit={handleSubmit}>
+    <Input label="Email" />
+    <Button type="submit">Login</Button>
+  </Stack>
+```
+### Accessibility
+The `Stack` component is purely presentational and does not interfere with the accessibility of its child components. When using semantic HTML elements via the `renderAs` prop, ensure that the content within the Stack adheres to best practices for accessibility.
+
+
+### Props
+
+Prop | Type | Default | Description
+--- | --- | --- | ---
+type | 'row' \| 'col' \| object | 'col' | "Direction. Pass an object `{ initial: 'col', md: 'row' }` for responsive layouts."
+gap | '0'...'12' | '4' | Spacing between items. Corresponds to Tailwind spacing scale.
+align | 'start' \| 'center' \| 'end' \| 'stretch' | - | CSS align-items property.
+justify | 'start' \| 'center' \| 'between' | - | CSS justify-content property.
+wrap | boolean | false | Whether to allow items to wrap to the next line.
+renderAs | HTMLTag | 'div' | "The HTML tag to render (e.g., section, ul, form)."

@@ -1,0 +1,93 @@
+---
+import type { HTMLTag, HTMLAttributes } from "astro/types";
+
+type Direction = "row" | "col";
+type ResponsiveDirection =
+  | Direction
+  | { initial: Direction; sm?: Direction; md?: Direction; lg?: Direction };
+
+interface Props extends HTMLAttributes<"div"> {
+  type?: ResponsiveDirection;
+
+  gap?: "2" | "4" | "6" | "8" | "12";
+  align?: "start" | "center" | "end" | "stretch" | "baseline";
+  justify?: "start" | "center" | "end" | "between" | "around";
+  wrap?: boolean;
+  renderAs?: HTMLTag;
+}
+
+const {
+  type = "col",
+  gap = "4",
+  align,
+  justify,
+  wrap = false,
+  renderAs: Element = "div",
+  class: className,
+  ...props
+} = Astro.props;
+
+const getFlexClass = (dir: Direction, prefix: string = "") => {
+  const utility = dir === "row" ? "flex-row" : "flex-col";
+  return prefix ? `${prefix}:${utility}` : utility;
+};
+
+let directionClasses = "";
+
+if (typeof type === "string") {
+  directionClasses = getFlexClass(type);
+} else {
+  const classes = [];
+  if (type.initial) classes.push(getFlexClass(type.initial));
+  if (type.sm) classes.push(getFlexClass(type.sm, "sm"));
+  if (type.md) classes.push(getFlexClass(type.md, "md"));
+  if (type.lg) classes.push(getFlexClass(type.lg, "lg"));
+  directionClasses = classes.join(" ");
+}
+
+const wrapClass = wrap ? "flex-wrap" : "flex-nowrap";
+
+const gapMap = {
+  "0": "gap-0",
+  "2": "gap-2",
+  "4": "gap-4",
+  "6": "gap-6",
+  "8": "gap-8",
+  "12": "gap-12",
+};
+
+const alignMap = {
+  start: "items-start",
+  center: "items-center",
+  end: "items-end",
+  stretch: "items-stretch",
+  baseline: "items-baseline",
+};
+
+const justifyMap = {
+  start: "justify-start",
+  center: "justify-center",
+  end: "justify-end",
+  between: "justify-between",
+  around: "justify-around",
+};
+
+const listStyles =
+  Element === "ul" || Element === "ol" ? "list-none p-0 m-0" : "";
+---
+
+<Element
+  class:list={[
+    "flex",
+    directionClasses,
+    wrapClass,
+    gapMap[gap],
+    align ? alignMap[align] : "",
+    justify ? justifyMap[justify] : "",
+    listStyles,
+    className,
+  ]}
+  {...props}
+>
+  <slot />
+</Element>

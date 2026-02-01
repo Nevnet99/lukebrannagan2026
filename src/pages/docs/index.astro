@@ -1,0 +1,32 @@
+---
+import { getCollection } from "astro:content";
+import SystemLayout from "../../layouts/SystemLayout.astro";
+
+const docs = await getCollection("developerDocs");
+
+const sortedDocs = docs.sort((a, b) => a.id.localeCompare(b.id));
+---
+
+<SystemLayout title="Developer Documentation">
+  <section>
+    <h1 class="text-4xl font-bold mb-8">Developer Docs</h1>
+
+    <ul class="space-y-4">
+      {
+        sortedDocs.map((doc) => (
+          <li class="border-b border-text/10 pb-4 last:border-0">
+            <a href={`/docs/${doc.id}/`} class="group block">
+              <h2 class="text-2xl font-semibold group-hover:text-green-400 group-hover:underline transition-colors font-mono">
+                {doc.data.title}
+              </h2>
+
+              {doc.data.description && (
+                <p class="text-text/60 text-sm mt-2">{doc.data.description}</p>
+              )}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</SystemLayout>

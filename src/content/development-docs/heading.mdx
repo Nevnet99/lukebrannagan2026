@@ -1,0 +1,76 @@
+---
+title: Heading
+description: A semantic typography component that enforces hierarchy and spacing.
+order: 3
+---
+
+import Heading from '../../components/DS/Heading.astro';
+import Stack from '../../components/DS/Stack.astro';
+import { Terminal } from '@lucide/astro';
+
+The `Heading` component provides standard typographic scales for the application. It strictly couples the **semantic HTML tag** with its **visual style** to ensure the document outline matches the visual hierarchy.
+
+---
+
+### Levels
+
+The `renderAs` prop determines both the HTML element and the applied Tailwind classes.
+
+<div class="p-6 border border-text/10 rounded-lg not-prose bg-background/50">
+  <Stack gap="6">
+    <div class="space-y-2">
+      <span class="text-xs text-text/40 font-mono">renderAs="h1"</span>
+      <Heading renderAs="h1">Hero Title</Heading>
+    </div>
+
+    <div class="space-y-2">
+      <span class="text-xs text-text/40 font-mono">renderAs="h2"</span>
+      <Heading renderAs="h2">Section Heading</Heading>
+    </div>
+
+    <div class="space-y-2">
+      <span class="text-xs text-text/40 font-mono">renderAs="h3"</span>
+      <Heading renderAs="h3">Card Title</Heading>
+    </div>
+  </Stack>
+</div>
+
+```jsx
+<Heading renderAs="h1">Hero Title</Heading>
+<Heading renderAs="h2">Section Heading</Heading>
+<Heading renderAs="h3">Card Title</Heading>
+```
+
+### H3 Special Behavior
+The h3 variant includes flex items-center gap-2 by default, making it perfect for card titles that require an icon next to the text.
+
+<div class="p-6 border border-text/10 rounded-lg not-prose bg-background/50">
+  <Heading renderAs="h3">
+    <Terminal size={20} className="text-green-400" />
+    <span>Developer Logs</span>
+  </Heading>
+</div>
+
+### Custom Styling
+You can append custom styles using the class prop. This is useful for changing colors or adjusting margins.
+
+<div class="p-6 border border-text/10 rounded-lg not-prose bg-background/50">
+  <Heading renderAs="h2" class="text-green-400 font-mono">
+    Custom Styled Heading
+  </Heading>
+</div>
+
+### Accessibility
+Using semantic HTML tags for headings is crucial for accessibility. Screen readers rely on the document outline to
+navigate content. The `Heading` component ensures that the visual hierarchy matches the semantic structure, enhancing the experience for all users.
+
+tips for accessibility:
+- Always use headings in a logical order (e.g., h1 > h2 > h3).
+- Avoid skipping heading levels to maintain a clear document structure.
+
+### Props
+
+Prop | Type | Default | Description
+--- | --- | --- | ---
+renderAs | 'h1'...'h6' | Required | The semantic HTML tag to render. Also determines the default style.
+class | string | undefined | Additional CSS classes to merge with the default styles.

@@ -1,0 +1,18 @@
+---
+type Props = {
+  renderAs?: "span" | "p";
+  class?: string;
+};
+
+const { renderAs = "span", class: className } = Astro.props;
+
+const styles = {
+  base: "text-[10px] uppercase border border-text/10 px-1.5 py-0.5 text-text/60 bg-text/5 rounded font-bold",
+};
+
+const Component = renderAs;
+---
+
+<Component class:list={[className, styles.base]}>
+  <slot />
+</Component>

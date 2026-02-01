@@ -1,0 +1,120 @@
+---
+title: Card
+description: A semantic container for grouping related content, featuring slots for headers and footers.
+order: 6
+---
+
+import Card from '../../components/DS/Card.astro';
+import Stack from '../../components/DS/Stack.astro';
+import Tag from '../../components/DS/Tag.astro';
+import Heading from '../../components/DS/Heading.astro';
+import Text from '../../components/DS/Text.astro';
+import { Terminal, ArrowUpRight } from '@lucide/astro';
+
+The `Card` component renders an `<article>` tag, making it semantically appropriate for self-contained content like blog posts, project summaries, or widgets. It includes built-in named slots for headers and footers to ensure consistent padding and borders across the system.
+
+---
+
+### Usage
+
+#### Basic Usage
+The simplest form of a card just wraps content in a bordered box.
+
+<div class="p-6 border border-text/10 rounded-lg not-prose bg-background/50">
+  <Card padding="sm">
+    <Heading renderAs="h3" class="mb-2">Simple Card</Heading>
+    <Text variant="body-small">This is a basic container for content.</Text>
+  </Card>
+</div>
+
+```jsx
+<Card padding="sm">
+  <Heading renderAs="h3">Simple Card</Heading>
+  <Text variant="body-small">This is a basic container for content.</Text>
+</Card>
+```
+
+
+Structured Data (Skills Style)
+Use the header slot to create a distinct title bar with a gray background. This is ideal for lists, widgets, or grouping small items.
+
+<div class="p-6 border border-text/10 rounded-lg not-prose bg-background/50 grid grid-cols-1 md:grid-cols-2 gap-4">
+  <Card padding="sm">
+  <fragment slot="header">
+    <Terminal size={16} />
+    <span class="text-xs font-bold uppercase">Backend</span>
+  </fragment>
+    <Stack type="row" gap="2" wrap>
+      <Tag>Go</Tag>
+      <Tag>Rust</Tag>
+      <Tag>Node.js</Tag>
+    </Stack>
+  </Card>
+</div>
+
+```jsx
+<Card padding="sm">
+  {/* Header Slot: Gray background bar */}
+  <fragment slot="header">
+    <Terminal size={16} />
+    <span class="font-bold uppercase">Backend</span>
+  </fragment>
+  
+  {/* Default Slot: Main Content */}
+  <Stack type="row" gap="2" wrap>
+    <Tag>Go</Tag>
+    <Tag>Rust</Tag>
+  </Stack>
+</Card>
+```
+#### Interactive Projects (Project Style)
+Use the interactive prop to add hover elevation and border transitions. Use the footer slot to dock actions to the bottom of the card with a top border.
+
+<div class="p-6 border border-text/10 rounded-lg not-prose bg-background/50 grid grid-cols-1 md:grid-cols-2 gap-4">
+  <Card interactive padding="md">
+    <Heading renderAs="h3" class="mb-2">Trading Engine</Heading>
+    <Text variant="body-small" class="mb-4">
+      High-frequency matching engine written in Go.
+    </Text>
+
+    <div slot="footer" class="flex items-center justify-between">
+      <Text variant="body-small" isBold>View Source</Text>
+      <ArrowUpRight size={16} />
+    </div>
+  </Card>
+</div>
+
+```jsx
+<Card interactive padding="md">
+  <Heading renderAs="h3">Trading Engine</Heading>
+  <Text>High-frequency matching engine written in Go.</Text>
+
+  {/* Footer Slot: Bordered bottom area */}
+  <div slot="footer" class="flex justify-between">
+    <a href="#">View Source</a>
+    <ArrowUpRight />
+  </div>
+</Card>
+```
+
+### Props
+
+Props | Type | Default | Description |
+------|------|---------|-------------
+`interactive` | `boolean` | `false` | If true, adds a hover lift effect and border color transition.
+`padding` | `'none' \| 'sm' \| 'md'` | `'md'` | Controls the internal padding of the main content area.
+`...` | `HTMLAttributes` | `-` | Accepts standard HTML attributes (e.g., class, id).
+
+
+### Slots
+ 
+ Slot Name | Description
+  --------- | -----------
+  default | The main content area of the card.
+  header | Renders a top bar with a distinct background and bottom border.
+  footer | Renders a bottom area with a top border, ideal for actions.
+
+
+
+
+

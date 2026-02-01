@@ -1,0 +1,138 @@
+---
+import { Image } from "astro:assets";
+import { Github, Linkedin, FileText } from "@lucide/astro";
+import Button from "../DS/Button.astro";
+import HiringStatus from "../HiringStatus.astro";
+import Heading from "../DS/Heading.astro";
+import Text from "../DS/Text.astro";
+
+const profile = {
+  headline: "Senior Frontend Engineer.",
+  bio: "I build scalable Design Systems and high-performance web applications. Currently modernizing legacy architectures at Kroo and migrating platforms to Vite & Next.js.",
+  avatarFull: "/assets/luke-profile.jpg",
+};
+
+const status = {
+  text: "Available",
+  color: "text-green-400",
+};
+
+const stack = ["TypeScript", "React", "Next.js", "Go", "AWS"];
+
+const links = [
+  {
+    label: "Download CV",
+    href: "/assets/Luke_Brannagan_CV.pdf",
+    icon: FileText,
+    isPrimary: true,
+    download: true,
+  },
+  {
+    label: "GitHub",
+    href: "https://github.com/Nevnet99",
+    icon: Github,
+    isPrimary: false,
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/luke-brannagan",
+    icon: Linkedin,
+    isPrimary: false,
+  },
+];
+---
+
+<section
+  class="relative w-full min-h-[80vh] flex items-center overflow-hidden font-mono"
+>
+  <div class="absolute inset-0 z-0 pointer-events-none select-none">
+    <div class="absolute inset-0">
+      <Image
+        src={profile.avatarFull}
+        alt=""
+        width={1920}
+        height={1080}
+        class="absolute inset-0 w-full h-full object-cover object-center md:object-[center_20%] opacity-20 md:opacity-30 grayscale contrast-125 md:translate-x-1/4 z-0"
+      />
+      <div
+        class="absolute inset-0 z-10 blur-2xl [mask-image:radial-gradient(ellipse_at_center,transparent_10%,black_80%)] md:[mask-image:radial-gradient(ellipse_at_center,transparent_20%,black_70%)]"
+      >
+        <Image
+          src={profile.avatarFull}
+          alt=""
+          width={1920}
+          height={1080}
+          class="w-full h-full object-cover object-center md:object-[center_20%] opacity-20 md:opacity-30 grayscale contrast-125 md:translate-x-1/4"
+        />
+      </div>
+    </div>
+
+    <div
+      class="absolute inset-0 z-20 bg-gradient-to-r from-background via-background/90 md:via-background/70 to-transparent"
+    >
+    </div>
+
+    <div
+      class="absolute inset-0 z-20 bg-gradient-to-t from-background via-transparent to-transparent"
+    >
+    </div>
+
+    <div
+      class="absolute inset-0 z-20 bg-gradient-to-l from-background via-transparent to-transparent"
+    >
+    </div>
+  </div>
+
+  <div class="relative z-30 w-full max-w-6xl mx-auto px-6 pt-20 pb-16">
+    <div class="max-w-2xl space-y-8">
+      <div class="flex items-center gap-3 text-sm text-text/60">
+        <HiringStatus color={status.color}> {status.text} </HiringStatus>
+      </div>
+
+      <div class="space-y-4">
+        <Heading renderAs="h1">
+          {profile.headline}
+        </Heading>
+
+        <Text>
+          {profile.bio}
+        </Text>
+      </div>
+
+      <div class="space-y-2 pt-4">
+        <span class="text-xs uppercase tracking-widest text-text/40"
+          >Core Stack</span
+        >
+        <ul class="flex flex-wrap gap-x-6 gap-y-2">
+          {
+            stack.map((tech) => (
+              <li>
+                <Text variant="body-small" isBold>
+                  {tech}
+                </Text>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <ul class="flex flex-wrap gap-4 pt-6">
+        {
+          links.map((link) => (
+            <li>
+              <Button
+                href={link.href}
+                variant={link.isPrimary ? "primary" : "secondary"}
+                icon={link.icon}
+                download={link.download}
+                target={link.download ? "_self" : "_blank"}
+              >
+                {link.label}
+              </Button>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>

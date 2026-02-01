@@ -1,13 +1,12 @@
 ---
 import { Terminal, GitCommit, Calendar } from "@lucide/astro";
+import Tag from "../DS/Tag.astro";
 
-// --- DATA CONFIGURATION ---
 const jobs = [
   {
     company: "Kroo",
     role: "Senior Web Platform Developer",
     date: "Jul 2023 – Present",
-    // "Current" job gets a special highlight color
     current: true,
     tech: ["React", "Vite", "Zustand", "A11y"],
     points: [
@@ -110,9 +109,7 @@ const jobs = [
           {job.tech && (
             <div class="flex flex-wrap gap-2 mb-4">
               {job.tech.map((t) => (
-                <span class="text-[10px] uppercase border border-text/10 px-1.5 py-0.5 text-text/60 bg-text/5 rounded">
-                  {t}
-                </span>
+                <Tag>{t}</Tag>
               ))}
             </div>
           )}

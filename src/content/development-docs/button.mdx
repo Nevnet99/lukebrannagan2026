@@ -1,0 +1,101 @@
+---
+title: Button
+description: A polymorphic component that renders as either a button or an anchor tag.
+order: 1
+---
+
+import Button from '../../components/DS/Button.astro';
+import Stack from '../../components/DS/Stack.astro';
+import { Terminal, Github, ArrowRight, Download } from "@lucide/astro";
+
+The `Button` component is the primary interactive element in the system. It is **polymorphic**, meaning it automatically renders as an `<a>` tag if you provide an `href`, or a `<button>` if you don't.
+
+---
+
+### Variants
+
+#### Primary
+Used for the main call to action on a page. High contrast, solid fill.
+
+<div class="p-6 border border-text/10 rounded-lg not-prose bg-background/50">
+  <Stack type="row" gap="4" align="center">
+    <Button>Default</Button>
+    <Button icon={Terminal}>With Icon</Button>
+    <Button icon={ArrowRight}>Start Now</Button>
+  </Stack>
+</div>
+
+```jsx
+import { Terminal } from 'lucide-astro';
+
+  <Button>Default</Button>
+  <Button icon={Terminal}>With Icon</Button>
+```
+
+####  Secondary
+Used for alternative actions or "glass" style interfaces. Features a backdrop blur and border.
+
+
+<div class="p-6 border border-text/10 rounded-lg not-prose bg-background/50">
+  <Stack type="row" gap="4" align="center">
+    <Button variant="secondary">Cancel</Button>
+    <Button variant="secondary" icon={Github}>View Repo</Button>
+  </Stack>
+</div>
+
+
+####  Sizes
+Supports two standard sizes: sm (small) and md (default).
+
+
+  <div class="p-6 border border-text/10 rounded-lg not-prose bg-background/50">
+    <Stack type="row" gap="4" align="center">
+      <Button size="sm">Small Button</Button>
+      <Button size="md">Medium Button</Button>
+    </Stack>
+  </div>
+
+#### Polymorphism (Links vs Buttons)
+The component detects intent based on the href prop.
+
+<div class="p-6 border border-text/10 rounded-lg not-prose bg-background/50">
+  <Stack type="row" gap="4" align="center">
+    <Button onClick={() => alert('Clicked!')}>I am a &lt;button&gt;</Button>
+    <Button href="#" icon={Download} download>I am an &lt;a&gt;</Button>
+  </Stack>
+</div>
+
+```jsx 
+// Renders <button>
+<Button onClick={() => console.log('click')}>Action</Button>
+
+// Renders <a href="/cv.pdf">
+<Button href="/cv.pdf" download>Download CV</Button>
+```
+
+### Accessibility
+
+The `Button` component is built with accessibility in mind. It supports keyboard navigation and includes appropriate
+ARIA attributes when necessary. When using the button as a link, ensure that the `href` is valid and description.
+
+A few tips for accessibility:
+- Always provide descriptive text for the button's purpose.
+- Ensure sufficient color contrast between the button text and background.
+- Use the `disabled` attribute to indicate non-interactive buttons.
+- Do not add onClick handlers to anchor elements; use buttons for actions.
+- Test buttons with screen readers to ensure they are announced correctly.
+
+
+
+### Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| variant | 'primary' \| 'secondary' | 'primary' | Visual style of the button. |
+| size | 'sm' \| 'md' | 'md' | Scale of padding and text. |
+| icon | Component | undefined | A Lucide icon component. |
+| href | string | undefined | If present, renders as `<a>`. |
+| ... | HTMLAttributes | - | Accepts all standard HTML attributes. |
+
+
+

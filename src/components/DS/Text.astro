@@ -1,0 +1,27 @@
+---
+type Props = {
+  renderAs?: "p" | "span";
+  class?: string;
+  variant?: "body" | "overline" | "body-small";
+  isBold?: boolean;
+};
+
+const {
+  renderAs = "p",
+  class: className,
+  variant = "body",
+  isBold = false,
+} = Astro.props;
+
+const variants = {
+  body: "text-lg leading-relaxed text-text/80 max-w-xl",
+  overline: "text-xs uppercase tracking-widest text-text/40",
+  ["body-small"]: "text-sm ",
+};
+
+const Element = renderAs;
+---
+
+<Element class:list={[variants[variant], isBold && "font-bold", className]}>
+  <slot />
+</Element>
