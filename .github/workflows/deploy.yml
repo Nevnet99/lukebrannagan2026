@@ -33,10 +33,16 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-west-2  
-
-      - name: Deploy to S3
-        # way to misspell the bucket name
-        run: aws s3 sync ./dist s3://lukebranangan.com --delete
-
+      - name: Deploy Build Assets
+        run: |
+          aws s3 sync ./dist/_astro s3://lukebranangan.com/_astro \
+            --cache-control "max-age=31536000,public,immutable" \
+            --delete
+      - name: Deploy Static Content
+        run: |
+          aws s3 sync ./dist s3://lukebranangan.com \
+            --exclude "_astro/*" \
+            --cache-control "max-age=0,no-cache,no-store,must-revalidate" \
+            --delete
       - name: Invalidate CloudFront
         run: aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_ID }} --paths "/*"
