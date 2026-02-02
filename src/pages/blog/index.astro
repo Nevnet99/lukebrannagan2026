@@ -10,26 +10,24 @@ const posts = (await getCollection("blog")).sort(
 ---
 
 <BaseLayout title={`Blog | ${SITE_TITLE}`} description={SITE_DESCRIPTION}>
-  <section class="mt-30">
+  <section class="mt-30 px-4 md:px-8">
     <h1 class="text-4xl font-bold mb-8">Blog</h1>
     <ul class="space-y-4">
       {
         posts.map((post) => (
-          <li class="border-b border-gray-200 pb-4 last:border-0 dark:border-gray-700">
+          <li class="border-b  pb-4 last:border-0 border-gray-700">
             <a href={`/blog/${post.id}/`} class="group block">
               <h2 class="text-2xl font-semibold group-hover:text-primary group-hover:underline transition-colors">
                 {post.data.title}
               </h2>
-              <p class="text-gray-500 dark:text-gray-400 text-sm mb-2">
+              <p class=" text-gray-400 text-sm mb-2">
                 {post.data.pubDate.toLocaleDateString("en-us", {
                   year: "numeric",
                   month: "short",
                   day: "numeric",
                 })}
               </p>
-              <p class="text-gray-700 dark:text-gray-300">
-                {post.data.description}
-              </p>
+              <p class=" text-gray-400">{post.data.description}</p>
             </a>
           </li>
         ))

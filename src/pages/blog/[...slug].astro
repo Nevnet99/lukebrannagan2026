@@ -30,7 +30,7 @@ const { Content } = await render(post);
     <div class="mb-10">
       <a
         href="/"
-        class="group inline-flex items-center gap-2 text-sm font-mono text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+        class="group inline-flex items-center gap-2 text-sm font-mono text-gray-400 hover:text-blue-400 transition-colors"
       >
         <ArrowLeft
           size={16}
@@ -55,7 +55,7 @@ const { Content } = await render(post);
       }
 
       <div
-        class="text-gray-500 dark:text-gray-400 mb-4 text-sm font-medium uppercase tracking-wider"
+        class="text-gray-400 mb-4 text-sm font-medium uppercase tracking-wider"
       >
         <time datetime={post.data.pubDate.toISOString()}>
           {
@@ -67,16 +67,14 @@ const { Content } = await render(post);
           }
         </time>
       </div>
-      <h1
-        class="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-gray-900 dark:text-white"
-      >
+      <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-white">
         {post.data.title}
       </h1>
-      <hr class="border-gray-200 dark:border-gray-800 mt-8 w-24 mx-auto" />
+      <hr class="border-gray-800 mt-8 w-24 mx-auto" />
     </div>
 
     <div
-      class="prose prose-lg dark:prose-invert mx-auto hover:prose-a:text-blue-600 prose-img:rounded-lg"
+      class="prose prose-lg prose-invert mx-auto hover:prose-a:text-blue-600 prose-img:rounded-lg"
     >
       <Content />
     </div>
