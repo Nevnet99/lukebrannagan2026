@@ -1,10 +1,10 @@
 ---
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
-import BaseHead from "../components/Structure/BaseHead.astro";
-import Footer from "../components/Footer.astro";
+import BaseHead from "../components/structure/BaseHead.astro";
+import Footer from "../components/structure/Footer.astro";
 import FormattedDate from "../components/FormattedDate.astro";
-import Header from "../components/Header.astro";
+import Navbar from "../components/structure/Navbar.astro";
 
 type Props = CollectionEntry<"blog">["data"];
 
@@ -17,7 +17,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
   </head>
 
   <body>
-    <Header />
+    <Navbar />
     <main>
       <article>
         <div class="hero-image">
