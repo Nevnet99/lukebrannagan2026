@@ -32,7 +32,8 @@ jobs:
           aws-region: eu-west-2  
 
       - name: Deploy to S3
-        run: aws s3 sync ./dist s3://lukebrannagan.com --delete
+        # way to misspell the bucket name
+        run: aws s3 sync ./dist s3://lukebranangan.com --delete
 
       - name: Invalidate CloudFront
         run: aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_ID }} --paths "/*"
