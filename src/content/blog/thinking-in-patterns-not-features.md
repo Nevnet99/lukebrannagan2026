@@ -8,34 +8,37 @@ tags: ['react', 'typescript', 'frontend', 'architecture']
 
 Patterns stand the test of time because they describe how something should work, not exactly how it’s built. The challenge comes when we design at too granular of a level.
 
-Building something that’s overly specific to a single feature quickly becomes hard to maintain, and documenting it is even harder.
-
-### The Boiling Water Analogy
+Building something that’s overly specific to a single feature quickly becomes hard to maintain, and documenting it, well is even harder.
 
 Think about the simple act of boiling water.
 
-**The pattern looks like this:**
-1. Heat up the water
-2. Wait until it boils
-3. Congratulations, you’ve boiled water
+The pattern looks like this:
 
-**The implementation might look like this:**
-1. Pour water into a kettle
-2. Plug the kettle in
-3. Press the switch
-4. Wait for it to boil
-5. Congratulations, you’ve boiled water
+- Heat up the water
+- Wait until it boils
+- Congratulations, you’ve boiled water
+  
+The implementation might look like this:
 
-The pattern doesn’t change, only the method does. You could use a kettle, a campfire, or any other heat source; however, the underlying logic stays the same.
+- Pour water into a kettle
+- Plug the kettle in
+- Press the switch
+- Wait for it to boil
+- Congratulations, you’ve boiled water
 
-We can apply this same thinking to frontend development. Instead of building a hook that only handles one very specific use case, we can build a more general hook that defines the pattern, then inject the details as dependencies. It’s like choosing whether you use the kettle or the campfire. The steps stay consistent; only the context changes.
+The pattern doesn’t change, only the method does. You could use a kettle, a campfire, or any other heat source however, the underlying logic stays the same.
+
+We can apply this same thinking to frontend development or any type of development for that matter. Instead of building a hook that only handles one very specific use case, we can build a more general hook that defines the pattern, then inject the details as dependencies. It’s like choosing whether you use the kettle or the campfire. The steps stay consistent; only the context changes.
 
 This approach helps keep code consistent, easier to maintain, and simpler to explain. By focusing on patterns that represent the essence of what we’re trying to do, we can swap out the details without rewriting the logic every time.
 
+---
+
 ## An Example
 
-### ❌ Imperative Solution
-The imperative solution handles each step manually. It is tightly coupled to the feature, making it hard to reuse, document, and test.
+### The Imperative Solution
+
+The imperative solution handles each step manually, tightly coupled to the feature, hard to reuse, document and test.
 
 ```tsx
 function useSignupSteps() {
@@ -60,8 +63,9 @@ function useSignupSteps() {
 const { steps, current, next } = useSignupSteps();
 ```
 
-### 🧩 Pattern Version
-This version defines a general **“steps pattern”** and lets you inject the specifics. It doesn't care *what* the steps are, only *how* to navigate them.
+### The Declarative Solution
+
+This version defines a general “steps pattern” and lets you inject the specifics.
 
 ```tsx
 import { useState, useCallback } from "react";
@@ -119,8 +123,11 @@ export function useSteps<T = any>({ steps, onStepChange }: UseStepsOptions<T>) {
 }
 ```
 
-## Key Takeaways
+---
 
-The goal is to design software with **patterns in mind** rather than just solving the immediate imperative problem.
+the key take away from this document should be to design software more with patterns in mind than the imperative solution.
 
-For example, if you need to use `localStorage`, don't just write a `useSaveThemeToStorage` hook. Instead, write a hook that handles the pattern of **persisting state to any storage**, which can then be used for your specific "Kettle" (saving the theme) or your "Campfire" (saving user preferences).
+Stop thinking about how to build a specific feature and start thinking about the underlying pattern that feature represents. This shift in mindset can lead to more flexible, maintainable, and reusable code.
+
+
+
