@@ -1,7 +1,7 @@
 ---
 title: 'Thinking in Patterns, Not Features'
 description: 'Patterns stand the test of time because they describe how something should work, not exactly how it is built. Learn how to decouple logic from implementation.'
-pubDate: '2025-10-25'
+pubDate: '2025-09-25'
 heroImage: '../../assets/blog-placeholder-5.jpg'
 tags: ['react', 'typescript', 'frontend', 'architecture']
 ---
