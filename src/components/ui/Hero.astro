@@ -50,6 +50,9 @@ const links = [
       <Image
         src={profile.avatarFull}
         alt=""
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
         width={1920}
         height={1080}
         class="absolute inset-0 w-full h-full object-cover object-center md:object-[center_20%] opacity-20 md:opacity-30 grayscale contrast-125 md:translate-x-1/4 z-0"
