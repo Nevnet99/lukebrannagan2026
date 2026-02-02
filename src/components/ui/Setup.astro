@@ -23,7 +23,7 @@ const config = [
   >
     {/* Filename Header */}
     <div
-      class="flex items-center justify-between text-xs text-text/40 mb-6 border-b border-white/10 pb-4"
+      class="flex items-center justify-between text-xs text-text/60 mb-6 border-b border-white/10 pb-4"
     >
       <span class="flex items-center gap-2">
         <Cpu size={14} />
@@ -46,16 +46,16 @@ const config = [
             <span class="text-[#ce9178]">
               {Array.isArray(item.value) ? (
                 <span>
-                  <span class="text-white/40">[</span>
+                  <span class="text-white/60">[</span>
                   {item.value.map((v, i) => (
                     <>
                       <span class="text-[#ce9178]">"{v}"</span>
                       {i < item.value.length - 1 && (
-                        <span class="text-white/40">, </span>
+                        <span class="text-white/60">, </span>
                       )}
                     </>
                   ))}
-                  <span class="text-white/40">]</span>
+                  <span class="text-white/60">]</span>
                 </span>
               ) : (
                 `"${item.value}"`

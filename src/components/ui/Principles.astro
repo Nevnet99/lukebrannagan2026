@@ -99,7 +99,7 @@ const principles = [
           </span>
           <h2 class="text-4xl font-bold tracking-tight mb-4">
             Core <br />
-            <span class="text-text/40">Principles</span>
+            <span class="text-text/60">Principles</span>
           </h2>
           <p class="text-text/60 leading-relaxed text-sm">
             The standards I adhere to. <br />
@@ -112,9 +112,9 @@ const principles = [
             principles.map((p) => (
               <a
                 href={`#principle-${p.id}`}
-                class="block text-xs text-text/40 hover:text-green-400 transition-colors py-1 truncate"
+                class="block text-xs text-text/60 hover:text-green-400 transition-colors py-1 truncate"
               >
-                <span class="mr-2 opacity-50">{p.id}</span> {p.title}
+                <span class="mr-2">{p.id}</span> {p.title}
               </a>
             ))
           }
@@ -131,7 +131,7 @@ const principles = [
                 <p.icon size={24} stroke-width={1.5} />
               </div>
               <div>
-                <span class="text-xs font-bold text-text/30 block mb-1">
+                <span class="text-xs font-bold text-text/50 block mb-1">
                   UNIT_{p.id}
                 </span>
                 <h3 class="text-2xl font-bold text-text/90 group-hover:text-green-400 transition-colors">
@@ -140,7 +140,7 @@ const principles = [
               </div>
             </div>
 
-            <div class="pl-16 border-l border-text/10 group-hover:border-green-400/30 transition-colors duration-500">
+            <div class="pl-16 border-l border-text/10 group-hover:border-green-400/50 transition-colors duration-500">
               <p class="text-lg text-text/70 leading-relaxed max-w-2xl">
                 {p.description}
               </p>

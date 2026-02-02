@@ -28,7 +28,7 @@ const posts = (await getCollection("blog"))
   <div class="border-t border-text/10 bg-background/50">
     {/* Table Header (Desktop) */}
     <div
-      class="hidden md:flex text-xs text-text/30 py-3 px-4 uppercase tracking-widest border-b border-text/5"
+      class="hidden md:flex text-xs text-text/50 py-3 px-4 uppercase tracking-widest border-b border-text/5"
     >
       <div class="w-32">Date</div>
       <div class="w-24">Size</div>
@@ -45,7 +45,7 @@ const posts = (await getCollection("blog"))
           >
             {console.log(post)}
             {/* Mobile: Date & Size Top Row */}
-            <div class="flex md:hidden text-xs text-text/40 font-mono mb-2 gap-4">
+            <div class="flex md:hidden text-xs text-text/60 font-mono mb-2 gap-4">
               <span>
                 {post.data.pubDate.toLocaleDateString("en-uk", {
                   year: "numeric",
@@ -65,15 +65,15 @@ const posts = (await getCollection("blog"))
             </div>
 
             {/* Desktop: Size/Time */}
-            <div class="hidden md:block w-24 text-xs text-text/40 font-mono">
+            <div class="hidden md:block w-24 text-xs text-text/60 font-mono">
               {Math.max(1, Math.floor(post?.body.length / 1024))}kb
             </div>
 
             {/* Filename / Title */}
             <div class="flex-1 flex items-center gap-3 text-sm font-bold text-text/80 group-hover:text-green-400 transition-colors">
-              <FileText size={14} class="md:hidden text-text/30" />
+              <FileText size={14} class="md:hidden text-text/50" />
               {post.data.title}
-              <span class="text-text/30 font-normal hidden md:inline-block">
+              <span class="text-text/50 font-normal hidden md:inline-block">
                 .md
               </span>
             </div>
@@ -82,7 +82,7 @@ const posts = (await getCollection("blog"))
       }
     </div>
 
-    <div class="py-3 px-4 text-xs text-text/20 font-mono">
+    <div class="py-3 px-4 text-xs text-text/50 font-mono">
       {posts.length} files found.
     </div>
   </div>
