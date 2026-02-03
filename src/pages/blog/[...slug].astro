@@ -16,14 +16,13 @@ type Props = CollectionEntry<"blog">;
 
 const post = Astro.props;
 const { Content, headings } = await render(post);
+console.log(post.data);
 ---
 
 <Base
   title={`${post.data.title} | ${SITE_TITLE}`}
   description={post.data.description}
-  image={post.data.heroImage?.src
-    ? { src: post.data.heroImage.src, alt: post.data.title }
-    : undefined}
+  image={post.data.heroImage?.src}
 >
   <div
     class="max-w-6xl mx-auto px-4 py-12 grid grid-cols-1 lg:grid-cols-[1fr_250px] gap-10"
