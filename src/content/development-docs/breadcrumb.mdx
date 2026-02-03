@@ -1,0 +1,82 @@
+---
+title: Breadcrumb
+description: A sticky, terminal-style navigation header for deep-linking and path visualization.
+order: 2
+---
+
+import BreadCrumb from '../../components/ds/BreadCrumb.astro';
+import Button from '../../components/ds/Button.astro';
+import { Share2, Terminal, Home, FileCode } from "@lucide/astro";
+
+The `BreadCrumb` component provides users with a persistent sense of location. It is designed to be **sticky**, staying pinned below the main navigation to provide context and utility actions (like sharing) during long reads.
+
+---
+
+### Usage
+
+The component is primarily used in layout files or top-level page templates. It mimics a file system path (e.g., `~/portfolio / blog / ...`) to align with the developer aesthetic.
+
+<div class="p-6 border border-text/10 rounded-lg not-prose bg-background/50 overflow-hidden">
+  <BreadCrumb 
+    items={[{ label: "~", href: "/" }, { label: "blog", href: "/blog" }]} 
+    currentFile="trading-engine.md"
+  />
+</div>
+
+```jsx
+import BreadCrumb from '../../components/ds/BreadCrumb.astro';
+
+<BreadCrumb 
+  items={[
+    { label: "~", href: "/" },
+    { label: "projects", href: "/projects" }
+  ]} 
+  currentFile="matching-engine.go"
+/>
+```
+### Features
+
+#### Sticky Positioning 
+The component is pinned to top-[64px] (assuming a standard 64px main navbar). It uses backdrop-blur to ensure content scrolling underneath remains legible but secondary.
+
+#### Action Slots
+
+The component includes a right-aligned <slot name="actions" />. This is perfect for contextual buttons like "Share," "Edit on GitHub," or "Download PDF."
+
+<div class="p-6 border border-text/10 rounded-lg not-prose bg-background/50">
+  <BreadCrumb
+  items={[{ label: "src", href: "#" }]}
+  currentFile="resume.pdf"
+  >
+    <Button slot="actions" size="sm" variant="secondary" icon={Share2}>
+      Share
+    </Button>
+  </BreadCrumb>
+</div>
+
+```jsx
+<BreadCrumb items={items} currentFile="post.md">
+  <button slot="actions">
+    Share
+  </button>
+</BreadCrumb>
+```
+
+#### Responsive Pathing
+
+The currentFile segment automatically truncates on mobile devices to prevent layout breaking, while the parent breadcrumbs remain accessible.
+
+##### Technical Details
+The component relies on z-index: 20 to sit above standard page content but below the primary site header (z-30).
+
+Warning: When using this component, ensure your page headings have a scroll-margin-top of at least 10rem (160px) to prevent them from being hidden behind the double-sticky header stack.
+
+
+### Props 
+
+Prop | Type | Default | Description
+--- | ---- | ------- | -----------
+items | `Array<{label, href}>`| [] | The path segments leading to the current page.
+currentFile | string | undefined | The final segment, visually highlighted as the active file.
+slot="actions" | slot | undefined | Right-aligned area for buttons or utility links.
+

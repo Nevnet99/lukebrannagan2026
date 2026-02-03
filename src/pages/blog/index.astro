@@ -2,32 +2,49 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/Base.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
+import BreadCrumb from "../../components/ds/BreadCrumb.astro";
 
-// Get all blog posts and sort by date (newest first)
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 ---
 
 <BaseLayout title={`Blog | ${SITE_TITLE}`} description={SITE_DESCRIPTION}>
-  <section class="mt-30 px-4 md:px-8">
-    <h1 class="text-4xl font-bold mb-8">Blog</h1>
-    <ul class="space-y-4">
+  <BreadCrumb items={[{ label: "~", href: "/" }]} currentFile="blog" />
+
+  <section class="max-w-6xl mx-auto px-4 py-12">
+    <div class="mb-12">
+      <h1 class="text-3xl font-bold text-white mb-2">Technical Journal</h1>
+      <p class="text-gray-400 font-mono text-sm italic">
+        {posts.length} entries found inside /src/blog/
+      </p>
+    </div>
+
+    <ul class="grid grid-cols-1 gap-8">
       {
         posts.map((post) => (
-          <li class="border-b  pb-4 last:border-0 border-gray-700">
-            <a href={`/blog/${post.id}/`} class="group block">
-              <h2 class="text-2xl font-semibold group-hover:text-primary group-hover:underline transition-colors">
-                {post.data.title}
-              </h2>
-              <p class=" text-gray-400 text-sm mb-2">
-                {post.data.pubDate.toLocaleDateString("en-us", {
-                  year: "numeric",
-                  month: "short",
-                  day: "numeric",
-                })}
+          <li class="group relative">
+            <a href={`/blog/${post.id}/`} class="block">
+              <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-2 mb-2">
+                <h2 class="text-xl font-bold text-gray-100 group-hover:text-green-400 transition-colors">
+                  {post.data.title}
+                </h2>
+                <time class="text-xs font-mono text-gray-500 whitespace-nowrap">
+                  {post.data.pubDate.toLocaleDateString("en-us", {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  })}
+                </time>
+              </div>
+              <p class="text-gray-400 leading-relaxed text-sm max-w-3xl">
+                {post.data.description}
               </p>
-              <p class=" text-gray-400">{post.data.description}</p>
+
+              <div class="mt-4 flex items-center gap-2 text-green-500 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+                <span class="text-xs font-mono">read_entry</span>
+                <span class="text-lg">→</span>
+              </div>
             </a>
           </li>
         ))

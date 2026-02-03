@@ -1,0 +1,46 @@
+---
+interface Props {
+  items: {
+    label: string;
+    href: string;
+  }[];
+  currentFile?: string;
+}
+
+const { items, currentFile } = Astro.props;
+---
+
+<div
+  class="sticky top-[64px] z-20 bg-background/95 backdrop-blur-sm border-b border-gray-800 w-full"
+>
+  <div
+    class="max-w-6xl mx-auto px-4 flex flex-wrap items-center justify-between gap-4 py-4"
+  >
+    <nav class="flex items-center gap-2 font-mono text-sm text-gray-400">
+      {
+        items.map((item, index) => (
+          <>
+            <a
+              href={item.href}
+              class="hover:text-blue-400 transition-colors whitespace-nowrap"
+            >
+              {item.label}
+            </a>
+            <span class="text-gray-600">/</span>
+          </>
+        ))
+      }
+      {
+        currentFile && (
+          <span class="text-gray-200 truncate max-w-[150px] md:max-w-none">
+            {currentFile}
+          </span>
+        )
+      }
+    </nav>
+
+    <div class="flex items-center gap-4">
+      <slot name="actions" />
+    </div>
+  </div>
+</div>

@@ -1,8 +1,8 @@
 ---
 import { type CollectionEntry, getCollection, render } from "astro:content";
-import { ArrowLeft } from "@lucide/astro"; // Import the icon
 import Base from "../../layouts/Base.astro";
 import { SITE_TITLE } from "../../consts";
+import Breadcrumbs from "../../components/ds/BreadCrumb.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -15,68 +15,192 @@ export async function getStaticPaths() {
 type Props = CollectionEntry<"blog">;
 
 const post = Astro.props;
-const { Content } = await render(post);
+const { Content, headings } = await render(post);
 ---
 
 <Base
   title={`${post.data.title} | ${SITE_TITLE}`}
   description={post.data.description}
-  image={post.data.heroImage.src
+  image={post.data.heroImage?.src
     ? { src: post.data.heroImage.src, alt: post.data.title }
     : undefined}
 >
-  <article class="max-w-3xl mx-auto px-4 py-12">
-    {/* --- BACK BUTTON ADDITION --- */}
-    <div class="mb-10">
-      <a
-        href="/"
-        class="group inline-flex items-center gap-2 text-sm font-mono text-gray-400 hover:text-blue-400 transition-colors"
-      >
-        <ArrowLeft
-          size={16}
-          class="group-hover:-translate-x-1 transition-transform duration-300"
-        />
-        <span>cd ~/portfolio</span>
-      </a>
-    </div>
+  <div
+    class="max-w-6xl mx-auto px-4 py-12 grid grid-cols-1 lg:grid-cols-[1fr_250px] gap-10"
+  >
+    <article class="w-full min-w-0">
+      <Breadcrumbs
+        items={[
+          { label: "~", href: "/" },
+          { label: "blog", href: "/blog" },
+        ]}
+        currentFile={`${post.id}.md`}
+      />
+      <div class="mb-8 text-center">
+        {
+          post.data.heroImage && (
+            <div class="mb-8 rounded-lg overflow-hidden shadow-sm">
+              <img
+                src={post.data.heroImage.src}
+                alt={post.data.title}
+                class="w-full h-auto object-cover"
+              />
+            </div>
+          )
+        }
 
-    {/* Header Section */}
-    <div class="mb-8 text-center">
-      {
-        post.data.heroImage && (
-          <div class="mb-8 rounded-lg overflow-hidden shadow-sm">
-            <img
-              src={post.data.heroImage.src}
-              alt={post.data.title}
-              class="w-full h-auto object-cover"
-            />
-          </div>
-        )
-      }
+        <div
+          class="text-gray-400 mb-4 text-sm font-medium uppercase tracking-wider"
+        >
+          <time datetime={post.data.pubDate.toISOString()}>
+            {
+              post.data.pubDate.toLocaleDateString("en-us", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })
+            }
+          </time>
+        </div>
+
+        {/* scroll-mt-32 added to handle nav overlap */}
+        <h1
+          id="overview"
+          class="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-white scroll-mt-32"
+        >
+          {post.data.title}
+        </h1>
+        <hr class="border-gray-800 mt-8 w-24 mx-auto" />
+      </div>
 
       <div
-        class="text-gray-400 mb-4 text-sm font-medium uppercase tracking-wider"
+        class="prose prose-lg prose-invert mx-auto hover:prose-a:text-blue-600 prose-img:rounded-lg prose-headings:scroll-mt-32"
       >
-        <time datetime={post.data.pubDate.toISOString()}>
-          {
-            post.data.pubDate.toLocaleDateString("en-us", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })
-          }
-        </time>
+        <Content />
       </div>
-      <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-white">
-        {post.data.title}
-      </h1>
-      <hr class="border-gray-800 mt-8 w-24 mx-auto" />
-    </div>
+    </article>
 
-    <div
-      class="prose prose-lg prose-invert mx-auto hover:prose-a:text-blue-600 prose-img:rounded-lg"
-    >
-      <Content />
-    </div>
-  </article>
+    {/* RIGHT COLUMN: Table of Contents */}
+    <aside class="hidden lg:block relative">
+      <div class="sticky top-24">
+        <h2
+          class="text-sm font-bold text-gray-200 uppercase tracking-wider mb-4"
+        >
+          On this page
+        </h2>
+        <nav class="toc-nav">
+          <ul class="flex flex-col space-y-3 text-sm border-l border-gray-800">
+            <li class="pl-4">
+              <a
+                href="#overview"
+                class="toc-link block text-gray-500 hover:text-blue-400 transition-colors duration-200"
+              >
+                {post.data.title}
+              </a>
+            </li>
+
+            {
+              headings.map((heading) => (
+                <li
+                  class:list={[
+                    "pl-4",
+                    { "ml-4": heading.depth === 2 },
+                    { "ml-8": heading.depth === 3 },
+                    { "ml-12": heading.depth === 4 },
+                    { "ml-16": heading.depth === 5 },
+                    { "ml-20": heading.depth === 6 },
+                  ]}
+                >
+                  <a
+                    href={`#${heading.slug}`}
+                    class="toc-link block text-gray-500 hover:text-blue-400 transition-colors duration-200"
+                  >
+                    {heading.text}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </div>
+    </aside>
+  </div>
 </Base>
+
+<script>
+  function initTOC() {
+    const links = document.querySelectorAll(".toc-link");
+    const articleHeadings = document.querySelectorAll(
+      "h1#overview, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6",
+    );
+
+    const setActive = (id) => {
+      links.forEach((l) => {
+        const linkHref = l.getAttribute("href").substring(1);
+        const isMatch = linkHref === id;
+        const parent = l.parentElement;
+
+        if (isMatch) {
+          l.classList.remove("text-gray-500");
+          l.classList.add("text-blue-400", "font-medium");
+          parent?.classList.add("border-l-2", "border-blue-400", "-ml-[1px]");
+        } else {
+          l.classList.remove("text-blue-400", "font-medium");
+          l.classList.add("text-gray-500");
+          parent?.classList.remove(
+            "border-l-2",
+            "border-blue-400",
+            "-ml-[1px]",
+          );
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntry = entries.find((entry) => entry.isIntersecting);
+        if (visibleEntry) {
+          setActive(visibleEntry.target.id);
+        }
+      },
+      {
+        rootMargin: "-100px 0px -66% 0px",
+        threshold: [0, 1],
+      },
+    );
+
+    articleHeadings.forEach((h) => observer.observe(h));
+
+    const handleScroll = () => {
+      const isAtBottom =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 50;
+
+      if (isAtBottom) {
+        const lastLink = links[links.length - 1];
+        if (lastLink) {
+          const lastId = lastLink.getAttribute("href").substring(1);
+          setActive(lastId);
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      observer.disconnect();
+    };
+  }
+  document.addEventListener("astro:page-load", initTOC);
+</script>
+
+<style is:global>
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4,
+  .prose h5,
+  .prose h6 {
+    scroll-margin-top: 8rem;
+  }
+</style>
